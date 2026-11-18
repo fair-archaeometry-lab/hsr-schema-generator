@@ -495,11 +495,11 @@
           <button class="filter" data-status="All" aria-pressed="true">
             All 97</button
           ><button class="filter" data-status="Direct" aria-pressed="false">
-            Direct 18</button
+            Direct 19</button
           ><button class="filter" data-status="Partial" aria-pressed="false">
-            Partial 38</button
+            Partial 65</button
           ><button class="filter" data-status="Missing" aria-pressed="false">
-            Missing 41
+            Missing 13
           </button>
         </div>
         <button id="export" class="btn">Export CSV</button>
@@ -579,8 +579,8 @@
           "description": " The location from where the sample was collected, as accurately as possible—noting that this can be sensitive information and in such cases, generalized information should be provided to the level it is safe to publish (e.g. spatial region). Ideally, GPS or lat–long coordinates should be included using WGS-84 format in decimal degrees. If the country, region, county, town or village covered by the sample collection is specified, then this should include current and contemporary name(s) and, where possible, a standardized reference such as the Getty Thesaurus of Geographic Names or GeoNames should be used. If names or administrative units change during the time period of the sample collection, they should be recorded separately. Site coordinates can also be entered as a National Grid Reference in a number of different ways (e.g., as a point, line, polygon). It is helpful to include the full postal code of the site, if applicable.",
           "group": 1,
           "status": "Partial",
-          "target": "sampleSource.sampleSiteDescription; sampleSource.sampleSiteAnnotationUrl",
-          "assessment": "Position on a source object differs from geographic collection provenance.",
+          "target": "sampleSource.sampleSiteDescription; sampleSource.sampleSiteAnnotationUrl; sampleSource.sourceId → HeritageObject.geoLocations",
+          "assessment": "Sample text or annotation can describe sampling position. Use linked object geometry only when its recorded origin is independently known to be the actual collection site; object origin, sampling position, and current storage location are distinct.",
           "datacite": "DataCite:geoLocation\nCollection-site location; equivalent structure. [§3.6, p.8; §4.1, p.9]"
         },
         {
@@ -589,9 +589,9 @@
           "obligation": "Recommended",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site point/coordinate; geoLocations is current sample location.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations (Point)",
+          "assessment": "Use only when the linked object origin represents the actual collection site and geoLocations.type is Point.",
           "datacite": "DataCite:geoLocation.geoLocationPoint\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -600,9 +600,9 @@
           "obligation": "Mandatory",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site point/coordinate; geoLocations is current sample location.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations.coordinates[0] (Point)",
+          "assessment": "Use only when the linked object origin represents the actual collection site and geoLocations.type is Point. In WGS84, index 0 is longitude.",
           "datacite": "DataCite:geoLocation.geoLocationPoint.pointLongitude\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -611,9 +611,9 @@
           "obligation": "Mandatory",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site point/coordinate; geoLocations is current sample location.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations.coordinates[1] (Point)",
+          "assessment": "Use only when the linked object origin represents the actual collection site and geoLocations.type is Point. In WGS84, index 1 is latitude.",
           "datacite": "DataCite:geoLocation.geoLocationPoint.pointLatitude\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -622,9 +622,9 @@
           "obligation": "Recommended",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site bounding box or bound coordinates.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations",
+          "assessment": "Conditional bounding box mapping: use only when the linked object’s origin geometry represents the actual collection site and the geometry supports this conversion. Bounding bounds would have to be derived from applicable geometry and may differ from the source’s recorded box. The shared GeoJSON definition is referenced, not defined, in the supplied object schema.",
           "datacite": "DataCite:geoLocation.geoLocationBox\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -633,9 +633,9 @@
           "obligation": "Mandatory",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site bounding box or bound coordinates.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations",
+          "assessment": "Conditional bounding box mapping: use only when the linked object’s origin geometry represents the actual collection site and the geometry supports this conversion. Bounding bounds would have to be derived from applicable geometry and may differ from the source’s recorded box. The shared GeoJSON definition is referenced, not defined, in the supplied object schema.",
           "datacite": "DataCite:geoLocation.geoLocationBox.westBoundLongitude\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -644,9 +644,9 @@
           "obligation": "Mandatory",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site bounding box or bound coordinates.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations",
+          "assessment": "Conditional bounding box mapping: use only when the linked object’s origin geometry represents the actual collection site and the geometry supports this conversion. Bounding bounds would have to be derived from applicable geometry and may differ from the source’s recorded box. The shared GeoJSON definition is referenced, not defined, in the supplied object schema.",
           "datacite": "DataCite:geoLocation.geoLocationBox.eastBoundLongitude\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -655,9 +655,9 @@
           "obligation": "Mandatory",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site bounding box or bound coordinates.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations",
+          "assessment": "Conditional bounding box mapping: use only when the linked object’s origin geometry represents the actual collection site and the geometry supports this conversion. Bounding bounds would have to be derived from applicable geometry and may differ from the source’s recorded box. The shared GeoJSON definition is referenced, not defined, in the supplied object schema.",
           "datacite": "DataCite:geoLocation.geoLocationBox.southBoundLatitude\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -666,9 +666,9 @@
           "obligation": "Mandatory",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site bounding box or bound coordinates.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations",
+          "assessment": "Conditional bounding box mapping: use only when the linked object’s origin geometry represents the actual collection site and the geometry supports this conversion. Bounding bounds would have to be derived from applicable geometry and may differ from the source’s recorded box. The shared GeoJSON definition is referenced, not defined, in the supplied object schema.",
           "datacite": "DataCite:geoLocation.geoLocationBox.northBoundLatitude\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -688,9 +688,9 @@
           "obligation": "Recommended",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site polygon structure.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations",
+          "assessment": "Conditional polygon mapping: use only when the linked object’s origin geometry represents the actual collection site and the geometry supports this conversion. In WGS84, coordinate order is longitude, latitude. The shared GeoJSON definition is referenced, not defined, in the supplied object schema.",
           "datacite": "DataCite:geoLocation.geoLocationPolygon\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -699,9 +699,9 @@
           "obligation": "Mandatory",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site polygon structure.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations",
+          "assessment": "Conditional polygon mapping: use only when the linked object’s origin geometry represents the actual collection site and the geometry supports this conversion. In WGS84, coordinate order is longitude, latitude. The shared GeoJSON definition is referenced, not defined, in the supplied object schema.",
           "datacite": "DataCite:geoLocation.geoLocationPolygon.polygonPoint\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -710,9 +710,9 @@
           "obligation": "Mandatory",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site polygon structure.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations",
+          "assessment": "Conditional polygon mapping: use only when the linked object’s origin geometry represents the actual collection site and the geometry supports this conversion. In WGS84, coordinate order is longitude, latitude. The shared GeoJSON definition is referenced, not defined, in the supplied object schema.",
           "datacite": "DataCite:geoLocation.geoLocationPolygon.polygonPoint.pointLongitude\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -721,9 +721,9 @@
           "obligation": "Mandatory",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site polygon structure.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations",
+          "assessment": "Conditional polygon mapping: use only when the linked object’s origin geometry represents the actual collection site and the geometry supports this conversion. In WGS84, coordinate order is longitude, latitude. The shared GeoJSON definition is referenced, not defined, in the supplied object schema.",
           "datacite": "DataCite:geoLocation.geoLocationPolygon.polygonPoint.pointLatitude\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -732,9 +732,9 @@
           "obligation": "Recommended",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site polygon structure.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations (designated Point)",
+          "assessment": "Use only a Point explicitly identified as the interior point of the same archaeological collection-site polygon. A standalone object-origin Point does not establish that role, and a polygon vertex or calculated point is not the originally recorded interior point.",
           "datacite": "DataCite:geoLocation.geoLocationPolygon.inPolygonPoint\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -743,9 +743,9 @@
           "obligation": "Mandatory",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site polygon structure.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations.coordinates[0] (designated Point)",
+          "assessment": "Use only a Point explicitly identified as the interior point of the same archaeological collection-site polygon. A standalone object-origin Point does not establish that role, and a polygon vertex or calculated point is not the originally recorded interior point. In WGS84, index 0 is longitude.",
           "datacite": "DataCite:geoLocation.geoLocationPolygon.inPolygonPoint.pointLongitude\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -754,9 +754,9 @@
           "obligation": "Mandatory",
           "description": " These subproperties follow from the DataCite Metadata Schema. Please see the documentation for the latest version of the DataCite Schema for the definitions of these subproperties.",
           "group": 1,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No collection-site polygon structure.",
+          "status": "Partial",
+          "target": "sampleSource.sourceId → HeritageObject.geoLocations.coordinates[1] (designated Point)",
+          "assessment": "Use only a Point explicitly identified as the interior point of the same archaeological collection-site polygon. A standalone object-origin Point does not establish that role, and a polygon vertex or calculated point is not the originally recorded interior point. In WGS84, index 1 is latitude.",
           "datacite": "DataCite:geoLocation.geoLocationPolygon.inPolygonPoint.pointLatitude\nSubproperty expansion of the equivalent geoLocation structure. [§3.6, p.8; DataCite 4.6 §18]"
         },
         {
@@ -909,8 +909,8 @@
           "description": " The full name of the collectorExcavator. The format for a person's name is: Surname, Forename.",
           "group": 4,
           "status": "Partial",
-          "target": "creators",
-          "assessment": "Actor references/names exist without an embedded structured name.",
+          "target": "creators[] → Person.lastName + Person.firstName; creators[] → Organisation.name",
+          "assessment": "Resolve the actor and format personal names as Surname, Forename. Confirm that the creator actually collected or excavated the sample; the link does not distinguish that role.",
           "datacite": "DataCite:Creator.creatorName\nName within the equivalent actor structure. [§2.2, p.4; §4.3, p.10; DataCite 4.6 §2.1]"
         },
         {
@@ -919,9 +919,9 @@
           "obligation": "Optional",
           "description": " The type of Name. Limited to a binary choice of whether Name belongs to a person or an institution.",
           "group": 4,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded name type, name components, ORCID, affiliation, or ROR; these may exist in actor records.",
+          "status": "Partial",
+          "target": "creators[] → Person or Organisation (resolved record type)",
+          "assessment": "Derive the binary name type from the resolved record type, not from Organisation.organisationType. Confirm that the creator actually collected or excavated the sample; the link does not distinguish that role.",
           "datacite": "DataCite:Creator.creatorName.nameType\nSubproperty expansion: map person/institution to Personal/Organizational. [§2.2, p.4; §4.3, p.10; DataCite 4.6 §2.1.a]"
         },
         {
@@ -930,9 +930,9 @@
           "obligation": "Recommended",
           "description": " The first or given name of the creatorExcavator. Used if creatorExcavator is a person.",
           "group": 4,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded name type, name components, ORCID, affiliation, or ROR; these may exist in actor records.",
+          "status": "Partial",
+          "target": "creators[] → Person.firstName",
+          "assessment": "Read the given name from the linked Person record. Confirm that the creator actually collected or excavated the sample; the link does not distinguish that role.",
           "datacite": "DataCite:Creator.givenName\nSubproperty expansion: Personal given name. [§2.2, p.4; §4.3, p.10; DataCite 4.6 §2.2]"
         },
         {
@@ -941,9 +941,9 @@
           "obligation": "Recommended",
           "description": " The last or family name of the creatorExcavator. Used if creatorExcavator is a person.",
           "group": 4,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded name type, name components, ORCID, affiliation, or ROR; these may exist in actor records.",
+          "status": "Partial",
+          "target": "creators[] → Person.lastName",
+          "assessment": "Read the family name from the linked Person record. Confirm that the creator actually collected or excavated the sample; the link does not distinguish that role.",
           "datacite": "DataCite:Creator.familyName\nSubproperty expansion: Personal family name. [§2.2, p.4; §4.3, p.10; DataCite 4.6 §2.3]"
         },
         {
@@ -952,9 +952,9 @@
           "obligation": "Recommended",
           "description": " If it exists, the ORCID iD that uniquely identifies the creatorExcavator. Used if creatorExcavator is a person.",
           "group": 4,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded name type, name components, ORCID, affiliation, or ROR; these may exist in actor records.",
+          "status": "Partial",
+          "target": "creators[] → Person.externalPids[].pid",
+          "assessment": "Select the PID whose paired pidType denotes ORCID. Confirm that the creator actually collected or excavated the sample; the link does not distinguish that role.",
           "datacite": "DataCite:Creator.nameIdentifier[nameIdentifierScheme='ORCID']\nSubproperty expansion: ORCID iD as a name identifier. [§2.2, p.4; §4.3, p.10; DataCite 4.6 §2.4]"
         },
         {
@@ -963,9 +963,9 @@
           "obligation": "Recommended",
           "description": " The organizational or institutional affiliation of the creatorExcavator. Used if creatorExcavator is a person or an institution (e.g., a research department). For the latter, this would likely be the name of its larger/umbrella organization.",
           "group": 4,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded name type, name components, ORCID, affiliation, or ROR; these may exist in actor records.",
+          "status": "Partial",
+          "target": "creators[] → Person.partOfOrganisation[].organisationPid → Organisation.name; creators[] → Organisation.partOfOrganisation[].organisationPid → Organisation.name",
+          "assessment": "Follow the person’s affiliation or the institutional actor’s parent organisation. Use the affiliation relevant to the sample event where the dates are known. Confirm that the creator actually collected or excavated the sample; the link does not distinguish that role.",
           "datacite": "DataCite:Creator.affiliation\nSubproperty expansion: Organizational affiliation. [§2.2, p.4; §4.3, p.10; DataCite 4.6 §2.5]"
         },
         {
@@ -974,9 +974,9 @@
           "obligation": "Recommended",
           "description": " If it exists, the ROR ID that uniquely identifies the organizational affiliation of the creatorExcavator.",
           "group": 4,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded name type, name components, ORCID, affiliation, or ROR; these may exist in actor records.",
+          "status": "Partial",
+          "target": "creators[] → Person.partOfOrganisation[].organisationPid → Organisation.externalPids[].pid; creators[] → Organisation.partOfOrganisation[].organisationPid → Organisation.externalPids[].pid",
+          "assessment": "Select the affiliated organisation’s PID whose paired pidType denotes ROR, if recorded; do not substitute the internal handle or the actor’s own ROR. Confirm that the creator actually collected or excavated the sample; the link does not distinguish that role.",
           "datacite": "DataCite:Creator.affiliation.affiliationIdentifier[affiliationIdentifierScheme='ROR']\nSubproperty expansion: ROR ID of the affiliation, not of the individual. [§2.2, p.4; §4.3, p.10; DataCite 4.6 §2.5.a]"
         },
         {
@@ -996,9 +996,9 @@
           "obligation": "Recommended",
           "description": " If it exists, the ROR ID that uniquely identifies the publishing organization.",
           "group": 5,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded publisher ROR; it may exist in the Organisation record.",
+          "status": "Direct",
+          "target": "publisher → Organisation.externalPids[].pid",
+          "assessment": "Resolve the publisher Organisation and select the PID whose paired pidType denotes ROR, if recorded. The publisher handle itself is not the ROR ID.",
           "datacite": "DataCite:Publisher.publisherIdentifier[publisherIdentifierScheme='ROR']\nSchema-level expansion of Publisher equivalence; the PDF does not separately spell out this subproperty. [§4.4, p.10; DataCite 4.6 §4.a–c]"
         },
         {
@@ -1030,8 +1030,8 @@
           "description": " The full name of the Contributor. The format for a person's name is: Surname, Forename.",
           "group": 6,
           "status": "Partial",
-          "target": "creators; custodian",
-          "assessment": "Name/reference exists for selected actor roles.",
+          "target": "creators[] or custodian → Person.lastName + Person.firstName; creators[] or custodian → Organisation.name",
+          "assessment": "Resolve the actor and format personal names as Surname, Forename. Applies only to actors represented by the existing creator or custodian links, not to all contributors.",
           "datacite": "DataCite:Contributor.contributorName\nName within the equivalent actor structure. [§3.2, p.6; §5.2, p.11; DataCite 4.6 §7.1]"
         },
         {
@@ -1040,9 +1040,9 @@
           "obligation": "Recommended",
           "description": " The type of Name. Limited to a binary choice of whether Name belongs to a person or an institution.",
           "group": 6,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded contributor name structure, ORCID, affiliation, or ROR.",
+          "status": "Partial",
+          "target": "creators[] or custodian → Person or Organisation (resolved record type)",
+          "assessment": "Derive the binary name type from the resolved record type, not from Organisation.organisationType. Applies only to actors represented by the existing creator or custodian links, not to all contributors.",
           "datacite": "DataCite:Contributor.contributorName.nameType\nSubproperty expansion: map person/institution to Personal/Organizational. [§3.2, p.6; §5.2, p.11; DataCite 4.6 §7.1.a]"
         },
         {
@@ -1051,9 +1051,9 @@
           "obligation": "Recommended",
           "description": " The first or given name of the Contributor. Used if Contributor is a person.",
           "group": 6,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded contributor name structure, ORCID, affiliation, or ROR.",
+          "status": "Partial",
+          "target": "creators[] or custodian → Person.firstName",
+          "assessment": "Read the given name from the linked Person record. Applies only to actors represented by the existing creator or custodian links, not to all contributors.",
           "datacite": "DataCite:Contributor.givenName\nSubproperty expansion: Personal given name. [§3.2, p.6; §5.2, p.11; DataCite 4.6 §7.2]"
         },
         {
@@ -1062,9 +1062,9 @@
           "obligation": "Recommended",
           "description": " The last or family name of the Contributor. Used if Contributor is a person.",
           "group": 6,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded contributor name structure, ORCID, affiliation, or ROR.",
+          "status": "Partial",
+          "target": "creators[] or custodian → Person.lastName",
+          "assessment": "Read the family name from the linked Person record. Applies only to actors represented by the existing creator or custodian links, not to all contributors.",
           "datacite": "DataCite:Contributor.familyName\nSubproperty expansion: Personal family name. [§3.2, p.6; §5.2, p.11; DataCite 4.6 §7.3]"
         },
         {
@@ -1073,9 +1073,9 @@
           "obligation": "Recommended",
           "description": " If it exists, the ORCID iD that uniquely identifies the Contributor. Used if Contributor is a person.",
           "group": 6,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded contributor name structure, ORCID, affiliation, or ROR.",
+          "status": "Partial",
+          "target": "creators[] or custodian → Person.externalPids[].pid",
+          "assessment": "Select the PID whose paired pidType denotes ORCID. Applies only to actors represented by the existing creator or custodian links, not to all contributors.",
           "datacite": "DataCite:Contributor.nameIdentifier[nameIdentifierScheme='ORCID']\nSubproperty expansion: ORCID iD as a name identifier. [§3.2, p.6; §5.2, p.11; DataCite 4.6 §7.4]"
         },
         {
@@ -1084,9 +1084,9 @@
           "obligation": "Recommended",
           "description": " The organizational or institutional affiliation of the Contributor. Used if Contributor is a person or an institution (e.g., a research department). For the latter, this would likely be the name of its larger/umbrella organization.",
           "group": 6,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded contributor name structure, ORCID, affiliation, or ROR.",
+          "status": "Partial",
+          "target": "creators[] or custodian → Person.partOfOrganisation[].organisationPid → Organisation.name; creators[] or custodian → Organisation.partOfOrganisation[].organisationPid → Organisation.name",
+          "assessment": "Follow the person’s affiliation or the institutional actor’s parent organisation. Use the affiliation relevant to the sample event where the dates are known. Applies only to actors represented by the existing creator or custodian links, not to all contributors.",
           "datacite": "DataCite:Contributor.affiliation\nSubproperty expansion: Organizational affiliation. [§3.2, p.6; §5.2, p.11; DataCite 4.6 §7.5]"
         },
         {
@@ -1095,9 +1095,9 @@
           "obligation": "Recommended",
           "description": " If it exists, the ROR ID that uniquely identifies the organizational affiliation of the Contributor.",
           "group": 6,
-          "status": "Missing",
-          "target": "—",
-          "assessment": "No embedded contributor name structure, ORCID, affiliation, or ROR.",
+          "status": "Partial",
+          "target": "creators[] or custodian → Person.partOfOrganisation[].organisationPid → Organisation.externalPids[].pid; creators[] or custodian → Organisation.partOfOrganisation[].organisationPid → Organisation.externalPids[].pid",
+          "assessment": "Select the affiliated organisation’s PID whose paired pidType denotes ROR, if recorded; do not substitute the internal handle or the actor’s own ROR. Applies only to actors represented by the existing creator or custodian links, not to all contributors.",
           "datacite": "DataCite:Contributor.affiliation.affiliationIdentifier[affiliationIdentifierScheme='ROR']\nSubproperty expansion: ROR ID of the affiliation, not of the individual. [§3.2, p.6; §5.2, p.11; DataCite 4.6 §7.5.a]"
         },
         {
@@ -1536,8 +1536,8 @@
           "description": "What the access rights are to the sample and/or who to contact about access. Access rights should ideally follow a controlled vocabulary.",
           "group": 21,
           "status": "Partial",
-          "target": "rightsList",
-          "assessment": "Resource rights are not physical-sample access/contact conditions.",
+          "target": "rightsList; custodian → Person.mbox; custodian → Organisation.mbox",
+          "assessment": "The linked custodian can supply a contact if it actually handles access requests. General rights and an actor email do not establish physical access conditions.",
           "datacite": "DataCite:Rights\nAccess conditions; use Rights subproperties as appropriate for the controlled vocabulary. [§5.12, p.13]"
         },
         {
@@ -1558,8 +1558,8 @@
           "description": "Relationships to other research outputs/entities that are identified by a globally unique identifier. In particular, if the sample was derived or subsampled from a parent source, and any references to analytical results (datasets).",
           "group": 22,
           "status": "Direct",
-          "target": "relatedIdentifiers; sampleSource.sourceId",
-          "assessment": "PID relations and source derivation are explicit.",
+          "target": "relatedIdentifiers; sampleSource.sourceId; sampleSource.sourceId → HeritageObject.parentObject",
+          "assessment": "Use the sample’s relation fields for its own links. A linked HeritageObject may point to a further ancestor through parentObject; this describes the object’s hierarchy and must not be treated as a direct sample relationship.",
           "datacite": "DataCite:relatedIdentifier\nAlmost 1:1 mapping; the recommendation encourages a HasMetadata link to ArchProfile metadata. [§3.4, p.7; §5.13, p.13]"
         },
         {
@@ -1774,6 +1774,14 @@
             : "Switch to compact density",
         );
       };
+      const statusCounts = rows.reduce((counts, row) => {
+        counts[row.status] = (counts[row.status] || 0) + 1;
+        return counts;
+      }, { All: rows.length });
+      document.querySelectorAll(".filter[data-status]").forEach((button) => {
+        const status = button.dataset.status;
+        button.textContent = `${status} ${statusCounts[status] || 0}`;
+      });
       render();
     </script>
   </body>
