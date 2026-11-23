@@ -1,203 +1,2469 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HSR Sample + Archaeology Supplement – Form Overview</title>
-<style>
-:root,[data-theme=light]{--bg:#f6f5f1;--surface:#fffefb;--offset:#eeece6;--text:#24231f;--muted:#68655d;--border:#dcd9d0;--core:#01696f;--core-bg:#d9eceb;--arch:#8a4b12;--arch-bg:#f4e4cc;--req:#a13544;--ok:#2f6f3e;--warn:#8a5a00;--shadow:0 1px 2px rgba(0,0,0,.06),0 6px 20px rgba(0,0,0,.05)}
-[data-theme=dark]{--bg:#161512;--surface:#211f1b;--offset:#2d2b26;--text:#ebe9e3;--muted:#b4b0a6;--border:#3a3731;--core:#6cc3c8;--core-bg:#1f3a3c;--arch:#e6b273;--arch-bg:#44361f;--req:#ee8f9b;--ok:#8fc896;--warn:#e6b86d;--shadow:none}
-*{box-sizing:border-box;margin:0}body{background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-header{position:sticky;top:0;z-index:10;background:color-mix(in oklab,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-h1{font-size:18px;flex:1;min-width:260px}h1 small{display:block;font-weight:400;color:var(--muted);font-size:12.5px}
-button{font:inherit;font-size:13px;padding:7px 12px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);cursor:pointer}
-button:hover{border-color:var(--core)}
-.switch{display:flex;align-items:center;gap:10px;padding:7px 14px;border-radius:999px;background:var(--arch-bg);color:var(--arch);font-weight:600;cursor:pointer;user-select:none}
-.switch input{width:18px;height:18px;accent-color:var(--arch)}
-main{max-width:1500px;margin:0 auto;padding:20px 24px 60px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 380px;gap:20px;align-items:start}
-@media(max-width:1250px){main{grid-template-columns:1fr 1fr}.preview{grid-column:1/-1;position:static!important}}
-@media(max-width:820px){main{grid-template-columns:1fr}}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
-.card-h{padding:16px 18px;border-bottom:1px solid var(--border)}
-.core .card-h{background:var(--core-bg);border-top:4px solid var(--core)}.arch .card-h{background:var(--arch-bg);border-top:4px solid var(--arch)}
-.card-h h2{font-size:17px}.core h2{color:var(--core)}.arch h2{color:var(--arch)}
-.card-h p{font-size:13px;color:var(--muted);margin-top:4px}
-.stats{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}.chip{font-size:11.5px;padding:2px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--border);color:var(--muted)}
-.arch.off .card-body{opacity:.4;pointer-events:none;filter:grayscale(.6)}
-.off-note{display:none;padding:10px 18px;background:var(--offset);font-size:13px;color:var(--muted)}.arch.off .off-note{display:block}
-details.sec{border-bottom:1px solid var(--border)}details.sec:last-child{border-bottom:0}
-summary{padding:12px 18px;cursor:pointer;font-weight:650;font-size:14px;display:flex;justify-content:space-between;gap:8px;list-style:none}
-summary::-webkit-details-marker{display:none}summary:before{content:"▸";margin-right:8px;color:var(--muted);transition:.15s}details[open]>summary:before{transform:rotate(90deg)}
-summary .n{margin-left:auto;font-weight:400;font-size:12px;color:var(--muted)}
-.sec-b{padding:2px 18px 16px;display:grid;gap:12px}
-.f label{display:flex;gap:6px;align-items:baseline;font-size:12.5px;font-weight:600;margin-bottom:3px;flex-wrap:wrap}
-.req{color:var(--req)}.tag{font-weight:500;font-size:10.5px;padding:1px 6px;border-radius:5px;background:var(--offset);color:var(--muted);font-family:ui-monospace,Consolas,monospace}
-.arch .tag{background:var(--arch-bg);color:var(--arch)}.core .tag{background:var(--core-bg);color:var(--core)}
-.hint{font-size:11.5px;color:var(--muted);margin-top:2px}
-input[type=text],input[type=url],input[type=date],input[type=number],select,textarea{width:100%;font:inherit;font-size:13.5px;padding:7px 9px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text)}
-textarea{min-height:64px;resize:vertical}input:focus,select:focus,textarea:focus{outline:2px solid var(--core);outline-offset:0}.arch input:focus,.arch select:focus,.arch textarea:focus{outline-color:var(--arch)}
-.obj{border:1px dashed var(--border);border-radius:10px;padding:10px;display:grid;gap:10px}
-.item{border:1px solid var(--border);border-radius:10px;padding:10px;position:relative;display:grid;gap:10px;background:var(--bg)}
-.item .rm{position:absolute;top:6px;right:6px;padding:0 7px;font-size:15px;line-height:22px}
-.add{font-size:12.5px;color:var(--muted);border-style:dashed;justify-self:start}
-.covered{padding:12px 18px 16px;border-top:1px solid var(--border);background:var(--offset)}
-.covered h3{font-size:12.5px;margin-bottom:8px;color:var(--muted);font-weight:600}.covered .chips{display:flex;flex-wrap:wrap;gap:5px}
-.covered .chips span{font-size:11px;padding:2px 8px;border-radius:999px;background:var(--core-bg);color:var(--core)}
-.link{display:flex;gap:8px;align-items:flex-start;padding:9px 11px;border-radius:9px;background:var(--core-bg);color:var(--core);font-size:12.5px}
-.status{font-size:12.5px;padding:8px 11px;border-radius:9px;border:1px solid var(--border);display:grid;gap:3px}
-.status .ok{color:var(--ok)}.status .warn{color:var(--warn)}
-.auto{font-size:12px;color:var(--muted);padding:6px 10px;border:1px dashed var(--border);border-radius:8px}
-.preview{position:sticky;top:78px}.preview pre{padding:14px 16px;font:12px/1.5 ui-monospace,Consolas,monospace;overflow:auto;max-height:70vh;white-space:pre-wrap;word-break:break-word}
-.preview .card-h{display:flex;justify-content:space-between;align-items:center;gap:8px}.preview h2{font-size:15px}
-.legend{max-width:1500px;margin:16px auto 0;padding:0 24px;display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
-</style></head><body data-theme="light">
-<header>
- <h1>Sample registration form<small>Two forms: core fields (HSR v0.9) + optional archaeology supplement (IGSN–DataCite Archaeological Sample Metadata Profile v1.0)</small></h1>
- <label class="switch"><input type="checkbox" id="isArch"> This is an archaeological sample</label>
- <button id="reset">Reset</button><button id="theme">Dark / light</button>
-</header>
-<div class="legend"><span><i style="background:var(--core)"></i>Form 1 – core, defined by HSR sample schema</span><span><i style="background:var(--arch)"></i>Form 2 – supplement, defined by the archaeology profile and not covered by HSR</span><span><b class="req">*</b> required in source schema or profile when the field is used</span></div>
-<main>
- <section class="card core" id="core"><div class="card-h"><h2>Form 1 · Core sample (HSR)</h2><p>Always filled in. Actors (creators, custodian, publisher) are chosen here once, as references to Person or Organisation records.</p><div class="stats" id="coreStats"></div></div><div class="card-body" id="coreBody"></div></section>
- <section class="card arch off" id="arch"><div class="card-h"><h2>Form 2 · Archaeology supplement</h2><p>Only for archaeological samples. Holds profile fields that HSR cannot express without losing meaning.</p><div class="stats" id="archStats"></div></div><div class="off-note">Tick “This is an archaeological sample” to enable this form.</div><div class="card-body" id="archBody"></div>
-  <div class="covered"><h3>Archaeology fields already covered by Form 1 (no duplicate entry needed)</h3><div class="chips" id="covered"></div></div></section>
- <aside class="card preview"><div class="card-h"><h2>Record preview (JSON)</h2><button id="copy">Copy</button></div><pre id="out"></pre></aside>
-</main>
-<script>
-const T=(k,l,o={})=>({key:k,label:l,type:'text',...o}),
- TA=(k,l,o={})=>({key:k,label:l,type:'textarea',...o}),
- D=(k,l,o={})=>({key:k,label:l,type:'date',...o}),
- U=(k,l,o={})=>({key:k,label:l,type:'url',...o}),
- S=(k,l,opts,o={})=>({key:k,label:l,type:'select',opts,...o}),
- O=(k,l,fields,o={})=>({key:k,label:l,type:'object',fields,...o}),
- R=(k,l,fields,o={})=>({key:k,label:l,type:'repeat',fields,...o}),
- L=(k,l,o={})=>({key:k,label:l,type:'strlist',...o}),
- CL=(k,l,o={})=>O(k,l,[T('vocabularyName','Vocabulary name'),U('vocabularyUri','Vocabulary URI'),U('termUri','Term URI'),T('code','Classification code')],{hint:'Provide at least one of: vocabulary name/URI, term URI, code. URIs are preferred.',...o});
-const relIdTypes=['ARK','arXiv','bibcode','DOI','EAN13','EISSN','Handle','IGSN','ISBN','ISSN','ISTC','LISSN','LSID','PMID','PURL','UPC','URL','URN','w3id'];
-const ROLES=['Collector/Excavator','ContactPerson','DataCollector','DataCurator','DataManager','Distributor','Editor','HostingInstitution','Producer','ProjectLeader','ProjectManager','ProjectMember','RegistrationAgency','RegistrationAuthority','RelatedPerson','Researcher','ResearchGroup','RightsHolder','Sponsor','Supervisor','WorkPackageLeader','Other'];
-const CORE=[
- {t:'Identity & type',f:[
-  U('doi','DOI',{tag:'doi'}),
-  S('types.resourceType','Resource type',['Heritage Sample','Heritage Feature-of-Interest','Heritage Sample Collection'],{req:1,tag:'types.resourceType',hint:'resourceTypeGeneral is fixed to PhysicalObject.'}),
-  R('titles','Titles / labels',[T('title','Title',{req:1}),S('titleType','Title type',['Title','AlternativeTitle','Subtitle','TranslatedTitle','Other'],{req:1}),T('lang','Language'),{key:'isCustodianIdentifier',label:'Title is the custodian’s identifier',type:'check'}],{req:1,tag:'titles[]',arch:'7 sampleTitle'}),
-  R('alternateIdentifiers','Alternate identifiers',[T('alternateIdentifier','Identifier',{req:1}),T('alternateIdentifierType','Identifier type',{req:1})],{tag:'alternateIdentifiers[]',arch:'10 otherIdentifier'}),
-  O('documentationIdentifier','Documentation identifier',[T('relatedIdentifier','Identifier',{req:1}),S('relatedIdentifierType','Identifier type',relIdTypes,{req:1})],{tag:'documentationIdentifier'})]},
- {t:'Source object & sampling position',f:[
-  O('sampleSource','Sample source',[T('sourceId','Source ID (HeritageObject or Sample handle)',{req:1}),T('sourceLabel','Source label'),S('sourceType','Source type',['painting','sculpture','book'],{req:1}),TA('sampleSiteDescription','Sample site description (position on the source)',{req:1}),U('sampleSiteAnnotationUrl','Sample site annotation URL (IIIF manifest or PID page)')],{req:1,tag:'sampleSource',arch:'13.2 siteDiagram (link only)'})]},
- {t:'Description & material',f:[
-  R('otherDescriptions','Descriptions',[TA('description','Description',{req:1}),S('descriptionType','Description type',['Sample description','Sampling method','Reason for sampling','Other'],{req:1})],{tag:'otherDescriptions[]',arch:'8 Description · 12 collectionMethod'}),
-  S('sampleType','Sample type',['Borehole','Cross section','Fragment','Scraping','Thin section'],{tag:'sampleType'}),
-  L('materialTerms','Material terms (VocabularyConcept handles)',{tag:'materialTerms[]',arch:'16 sampleMaterialType · 16.1'}),
-  R('subjects','Subjects / keywords',[T('subject','Subject',{req:1}),T('subjectScheme','Scheme'),U('schemeUri','Scheme URI'),U('valueUri','Value URI'),T('classificationCode','Classification code')],{tag:'subjects[]',arch:'9 Subject · 20 generalKeywords'}),
-  L('sizes','Sizes incl. unit, e.g. “weight 653 g”, “depth 10 cm”',{tag:'sizes[]',arch:'14 sampleDepth · 15 sampleWeight'})]},
- {t:'Actors (single source of truth)',f:[
-  L('creators','Creators / collectors (Person or Organisation handles)',{req:1,tag:'creators[]',arch:'4 collectorExcavator · 6 Contributor',hint:'Include everyone who created, collected or processed the sample. Archaeology roles are assigned in Form 2.'}),
-  T('custodian','Custodian (Organisation or Person handle)',{req:1,tag:'custodian'}),
-  T('publisher','Publisher (Organisation handle)',{req:1,tag:'publisher',arch:'5 Publisher · 5.1 ROR'}),
-  T('publicationYear','Publication year',{tag:'publicationYear'})]},
- {t:'Dates',f:[
-  O('dates','Dates',[D('collectedDate','Collected'),D('mountedDate','Mounted'),D('consumedDate','Consumed'),D('destroyedDate','Destroyed'),D('publishedDate','Published',{req:1})],{req:1,tag:'dates',arch:'11 collectionDate'})]},
- {t:'Funding, rights & relations',f:[
-  T('version','Version (major.minor)',{tag:'version'}),
-  R('fundingReferences','Funding references',[T('funderName','Funder name',{req:1}),T('funderIdentifier','Funder identifier'),S('funderIdentifierType','Identifier type',['ISNI','GRID','Crossref Funder ID','ROR','Other']),T('awardNumber','Award number'),U('awardUri','Award URI'),T('awardTitle','Award title')],{tag:'fundingReferences[]'}),
-  R('rightsList','Rights',[T('rights','Rights'),U('rightsUri','Rights URI'),T('rightsIdentifier','Rights identifier'),T('rightsIdentifierScheme','Scheme'),U('schemeUri','Scheme URI')],{tag:'rightsList[]'}),
-  R('relatedIdentifiers','Related identifiers',[T('relatedIdentifier','Identifier',{req:1}),S('relatedIdentifierType','Identifier type',relIdTypes,{req:1}),T('relationType','Relation type (e.g. IsDerivedFrom, IsSourceOf)',{req:1}),T('relatedMetadataScheme','Metadata scheme (HasMetadata only)'),U('schemeUri','Scheme URI'),T('schemeType','Scheme type'),T('resourceTypeGeneral','Related resource type')],{tag:'relatedIdentifiers[]',arch:'22 Relations'})]}
-];
-const ARCH=[
- {t:'1 · Project & site',f:[
-  O('project','Project / site',[T('title','Project or site title',{req:1,arch:'1'}),TA('description','Project description',{arch:'1.1'}),T('agencyIdentifier','Agency / site identifier',{arch:'1.3',hint:'e.g. Smithsonian Trinomial'})],{req:1}),
-  O('site','Site details',[T('owner','Site owner',{arch:'1.5',hint:'Default “Private”. e.g. Sydney Harbour Foreshore Authority'}),T('temporalCoverage','Site temporal coverage',{arch:'1.4',hint:'e.g. Bronze Age, Medieval'}),CL('temporalClassification','Temporal classification',{arch:'1.4.1'}),T('type','Site type',{arch:'1.6',hint:'e.g. Cemetery, Castle, Monastery'}),CL('siteClassification','Site classification',{arch:'1.6.1'}),L('keywords','Site keywords',{arch:'1.7'})])]},
- {t:'2–3 · Investigation',f:[
-  O('investigation','Investigation',[T('type','Investigation type',{arch:'2',hint:'e.g. Survey, Excavation'}),CL('typeClassification','Investigation classification',{arch:'2.1'}),D('startDate','Start date',{req:1,arch:'3.1'}),D('endDate','End date',{req:1,arch:'3.2'})],{req:1,hint:'Dates are mandatory in the profile.'})]},
- {t:'4 · 6 · Actor roles',f:[
-  {key:'__actorInfo',type:'info'},
-  R('actorRoles','Role assignments',[S('actor','Actor (chosen in Form 1)','ACTORS',{req:1,hint:'Only actors entered in Form 1 can be selected. Name, ORCID, affiliation and ROR come from the linked Person/Organisation record.'}),S('role','Archaeology role',ROLES,{req:1,hint:'Collector/Excavator = profile field 4. Other roles = profile field 6.1 (DataCite contributorType).'})],{arch:'4 · 6 · 6.1'}),
-  {key:'__actorStatus',type:'status'}]},
- {t:'12 · Collection method',f:[
-  O('collection','Collection',[CL('methodClassification','Collection method classification',{arch:'12.1',req:1}),T('housing','Sample housing',{arch:'12.2',req:1,hint:'e.g. Ziplock bag, Sterile container'}),U('photoUrl','Sample photo URL',{arch:'12.3'}),T('photoLicence','Photo licence',{arch:'12.3.1',hint:'Required if a photo is given. e.g. CC BY-SA 4.0'})])]},
- {t:'13 · Stratigraphic context',f:[
-  O('context','Context',[T('id','Context identifier',{arch:'13',hint:'Site-specific unit ID, e.g. A301. Mandatory for surveys and excavations.'}),T('type','Context type',{arch:'13.1',hint:'e.g. Grave, Storage pit'}),CL('typeClassification','Context classification',{arch:'13.1.1'}),R('zones','Zones',[T('type','Zone type',{hint:'Area, Trench, Transect…'}),T('id','Zone ID',{req:1})],{arch:'13.3'}),U('diagramUrl','Site diagram URL',{arch:'13.2'}),T('diagramLicence','Diagram licence',{arch:'13.2.1',hint:'Required if a diagram is given.'}),T('soilTexture','Soil texture',{arch:'13.4',hint:'e.g. Sandy silt'}),CL('soilClassification','Soil classification',{arch:'13.4.1'}),TA('description','Context description',{arch:'13.5'})])]},
- {t:'14–15 · Measurement details',f:[
-  O('measurements','Measurements',[T('depthReferencePoint','Depth reference point',{arch:'14.2',hint:'e.g. Top lens'}),T('weightConditions','Weight conditions',{arch:'15.2',hint:'e.g. Cleaned, With soil, Dried, Humid'})],{hint:'Value and unit are entered in Form 1 under “Sizes”.'})]},
- {t:'17 · Colour',f:[
-  O('colour','Colour',[T('value','Colour',{arch:'17',hint:'e.g. 2.5YR 3/3 Dark Reddish Brown'}),CL('classification','Colour classification',{arch:'17.1'}),T('area','Coloured area',{arch:'17.2',hint:'e.g. Urn handle'})])]},
- {t:'18–19 · Dating',f:[
-  O('absoluteDating','Absolute dating',[T('range','Age or range (ISO 8601)',{arch:'18',hint:'e.g. -300/-150'}),T('method','Dating method',{arch:'18.1',hint:'e.g. Radiocarbon dating'}),CL('methodClassification','Dating method classification',{arch:'18.2'})]),
-  O('relativeDating','Relative dating',[T('term','Period / cultural term',{arch:'19',hint:'e.g. PaleoIndian, Archaic'}),CL('classification','Dating classification',{arch:'19.1'})])]},
- {t:'21 · Current status & access',f:[
-  O('currentStatus','Current status',[T('value','Status',{arch:'21',hint:'e.g. Archived, Destroyed'}),D('statusDate','Status revised on',{arch:'21'}),T('storageLocation','Storage location',{arch:'21.1',hint:'e.g. Archaeological collection of The British Museum'}),TA('accessConditions','Access conditions',{arch:'21.2'}),S('accessType','Access type',['Public','Private'],{arch:'21.2.1'})])]}
-];
-const COVERED=['5 Publisher','5.1 ROR','7 sampleTitle','8 Description','9 Subject','9.1 subjectClassification','10 otherIdentifier','11 collectionDate','12 collectionMethod','14 sampleDepth','14.1 depthUnits','15 sampleWeight','15.1 weightUnits','16 sampleMaterialType','16.1 materialClassification','20 generalKeywords','22 Relations (22.1–22.5)','4.1–4.6 collector name/ORCID/affiliation/ROR','6.2–6.7 contributor name/ORCID/affiliation/ROR','1.2 siteLocation (via source object geoLocations)','12.3 samplePhoto (link)','13.2 siteDiagram (link)'];
-let state={},arch=false;
-const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const get=(o,p)=>p.split('.').reduce((a,k)=>a?.[k],o);
-const set=(o,p,v)=>{const ks=p.split('.');ks.slice(0,-1).forEach(k=>o=o[k]??={});o[ks.at(-1)]=v};
-function actorList(){
- const m=new Map(),add=(h,r)=>{h=(h||'').trim();if(!h)return;if(!m.has(h))m.set(h,[]);if(!m.get(h).includes(r))m.get(h).push(r)};
- (state.core.creators||[]).forEach(h=>add(h,'creator'));add(state.core.custodian,'custodian');add(state.core.publisher,'publisher');
- return[...m].map(([h,r])=>({v:h,l:`${h}  ·  Form 1: ${r.join(', ')}`}));
-}
-function optHtml(f,v){
- if(f.opts==='ACTORS'){
-  const a=actorList(),has=a.some(x=>x.v===v);
-  let h=`<option value="">${a.length?'— select an actor —':'— add actors in Form 1 first —'}</option>`;
-  h+=a.map(x=>`<option value="${esc(x.v)}" ${x.v===v?'selected':''}>${esc(x.l)}</option>`).join('');
-  if(v&&!has)h+=`<option value="${esc(v)}" selected>⚠ ${esc(v)} (no longer in Form 1)</option>`;
-  return h}
- return `<option value="">—</option>`+f.opts.map(o=>`<option ${v===o?'selected':''}>${esc(o)}</option>`).join('');
-}
-const label=f=>`<label>${esc(f.label)}${f.req?'<span class="req">*</span>':''}${f.tag?`<span class="tag">${esc(f.tag)}</span>`:''}${f.arch?`<span class="tag">archaeology ${esc(f.arch)}</span>`:''}</label>`;
-function ctl(f,path,root){
- const v=get(root,path);
- if(f.type==='info')return `<div class="link">🔗 <span>Actors are entered once in Form 1 (creators, custodian, publisher). Here you only assign an archaeology role to them. The custodian is exported automatically as <b>HostingInstitution</b> unless you assign a different role.</span></div>`;
- if(f.type==='status')return `<div class="status" id="actorStatus"></div>`;
- if(f.type==='check')return `<label style="font-weight:500"><input type="checkbox" data-p="${path}" ${v?'checked':''}> ${esc(f.label)}</label>`;
- let c='';
- if(f.type==='textarea')c=`<textarea data-p="${path}">${esc(v)}</textarea>`;
- else if(f.type==='select')c=`<select data-p="${path}" ${f.opts==='ACTORS'?'data-actor="1"':''}>${optHtml(f,v)}</select>`;
- else if(f.type==='object')c=`<div class="obj">${f.fields.map(x=>`<div class="f">${ctl(x,path+'.'+x.key,root)}</div>`).join('')}</div>`;
- else if(f.type==='repeat'){const a=get(root,path)||[];c=`<div style="display:grid;gap:10px">${a.map((it,i)=>`<div class="item"><button class="rm" data-rm="${path}" data-i="${i}" title="Remove">×</button>${f.fields.map(x=>`<div class="f">${ctl(x,path+'.'+i+'.'+x.key,root)}</div>`).join('')}</div>`).join('')}<button class="add" data-add="${path}">+ Add ${esc(f.label.toLowerCase())}</button></div>`}
- else if(f.type==='strlist'){const a=get(root,path)||[];c=`<div style="display:grid;gap:6px">${a.map((x,i)=>`<div style="display:flex;gap:6px"><input type="text" data-p="${path}.${i}" value="${esc(x)}"><button data-rm="${path}" data-i="${i}">×</button></div>`).join('')}<button class="add" data-add="${path}" data-str="1">+ Add</button></div>`}
- else c=`<input type="${f.type}" data-p="${path}" value="${esc(v)}">`;
- return label(f)+c+(f.hint?`<div class="hint">${esc(f.hint)}</div>`:'');
-}
-function draw(id,secs,key){
- const root=state[key];
- document.getElementById(id).innerHTML=secs.map((s,i)=>`<details class="sec" ${i<2?'open':''}><summary>${esc(s.t)}<span class="n">${s.f.filter(f=>!f.type.match(/info|status/)).length} group${s.f.length>1?'s':''}</span></summary><div class="sec-b">${s.f.map(f=>`<div class="f">${ctl(f,f.key,root)}</div>`).join('')}</div></details>`).join('');
-}
-function count(fs){let n=0,r=0;const w=f=>{if(f.type==='info'||f.type==='status')return;if(f.fields)f.fields.forEach(w);else{n++;if(f.req)r++}};fs.forEach(s=>s.f.forEach(w));return[n,r]}
-function stats(){for(const[id,secs,l]of[['coreStats',CORE,'HSR'],['archStats',ARCH,'archaeology']]){const[n,r]=count(secs);document.getElementById(id).innerHTML=`<span class="chip">${secs.length} sections</span><span class="chip">${n} input fields</span><span class="chip">${r} marked required</span><span class="chip">source: ${l==='HSR'?'hsr-sample schema v0.8/0.9':'Archaeology profile v1.0'}</span>`}}
-function clean(v){if(Array.isArray(v)){const a=v.map(clean).filter(x=>x!==undefined);return a.length?a:undefined}
- if(v&&typeof v==='object'){const o={};for(const[k,x]of Object.entries(v)){const c=clean(x);if(c!==undefined)o[k]=c}return Object.keys(o).length?o:undefined}
- return v===''||v===false||v==null?undefined:v}
-function effectiveRoles(){
- const known=new Set(actorList().map(a=>a.v));
- const rows=(state.arch.actorRoles||[]).filter(r=>r.actor&&r.role&&known.has(r.actor)).map(r=>({actor:r.actor,role:r.role}));
- const c=(state.core.custodian||'').trim();
- if(c&&!rows.some(r=>r.actor===c))rows.push({actor:c,role:'HostingInstitution',assigned:'automatic'});
- return rows}
-function refreshActors(){
- document.querySelectorAll('select[data-actor]').forEach(s=>{const f={opts:'ACTORS'};s.innerHTML=optHtml(f,s.value||get(state.arch,s.dataset.p))});
- const st=document.getElementById('actorStatus');if(!st)return;
- const list=actorList(),roles=effectiveRoles(),assigned=new Set(roles.map(r=>r.actor));
- const unassigned=list.filter(a=>!assigned.has(a.v)).map(a=>a.v),stale=(state.arch.actorRoles||[]).filter(r=>r.actor&&!list.some(a=>a.v===r.actor)).map(r=>r.actor);
- const hasCol=roles.some(r=>r.role==='Collector/Excavator');
- st.innerHTML=`<div class="${hasCol?'ok':'warn'}">${hasCol?'✓':'⚠'} Collector/Excavator (profile field 4, mandatory): ${hasCol?'assigned':'no actor assigned yet'}</div>`
-  +`<div>${list.length} actor${list.length===1?'':'s'} in Form 1 · ${list.length-unassigned.length} with a role</div>`
-  +(unassigned.length?`<div class="warn">No role yet: ${unassigned.map(esc).join(', ')}</div>`:'')
-  +(stale.length?`<div class="warn">Not in Form 1 any more: ${stale.map(esc).join(', ')}</div>`:'')
-  +(state.core.custodian?`<div class="auto">Custodian ${esc(state.core.custodian)} → HostingInstitution (automatic unless you assign another role)</div>`:'')}
-function out(){const c=clean(state.core)||{},o={...c};if(o.types||o.titles)o.types={...(o.types||{}),resourceTypeGeneral:'PhysicalObject'};
- if(arch){const a=clean(state.arch)||{};delete a.actorRoles;const r=effectiveRoles();if(r.length)a.actorRoles=r;if(Object.keys(a).length)o.archaeologySupplement=a}
- document.getElementById('out').textContent=JSON.stringify(o,null,2);refreshActors()}
-function init(){state={core:{},arch:{}};draw('coreBody',CORE,'core');draw('archBody',ARCH,'arch');out()}
-document.addEventListener('input',e=>{const p=e.target.dataset?.p;if(!p)return;const root=e.target.closest('#core')?state.core:state.arch;set(root,p,e.target.type==='checkbox'?e.target.checked:e.target.value);out()});
-function redraw(t){const k=t.closest('#core')?'core':'arch',s=k==='core'?CORE:ARCH,id=k+'Body',open=[...document.querySelectorAll('#'+id+' details')].map(d=>d.open);return[k,s,id,()=>{draw(id,s,k);document.querySelectorAll('#'+id+' details').forEach((d,i)=>d.open=open[i]);out()}]}
-document.addEventListener('click',e=>{const t=e.target;
- if(t.dataset.add){const[k,,,done]=redraw(t);let a=get(state[k],t.dataset.add);if(!a)set(state[k],t.dataset.add,a=[]);a.push(t.dataset.str?'':{});done()}
- if(t.dataset.rm){const[k,,,done]=redraw(t);get(state[k],t.dataset.rm).splice(+t.dataset.i,1);done()}});
-document.getElementById('isArch').onchange=e=>{arch=e.target.checked;document.getElementById('arch').classList.toggle('off',!arch);out()};
-document.getElementById('reset').onclick=()=>{document.getElementById('isArch').checked=false;arch=false;document.getElementById('arch').classList.add('off');init()};
-document.getElementById('theme').onclick=()=>{const b=document.body;b.dataset.theme=b.dataset.theme==='dark'?'light':'dark'};
-document.getElementById('copy').onclick=async e=>{await navigator.clipboard.writeText(document.getElementById('out').textContent);e.target.textContent='Copied';setTimeout(()=>e.target.textContent='Copy',1200)};
-document.getElementById('covered').innerHTML=COVERED.map(x=>`<span>${esc(x)}</span>`).join('');
-stats();init();
-</script></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>HSR Sample + Archaeology Supplement – Form Overview</title>
+    <style>
+      :root,
+      [data-theme="light"] {
+        --bg: #f6f5f1;
+        --surface: #fffefb;
+        --offset: #eeece6;
+        --text: #24231f;
+        --muted: #68655d;
+        --border: #dcd9d0;
+        --core: #01696f;
+        --core-bg: #d9eceb;
+        --arch: #8a4b12;
+        --arch-bg: #f4e4cc;
+        --req: #a13544;
+        --ok: #2f6f3e;
+        --warn: #8a5a00;
+        --link: #0b5cad;
+        --cv: #3f3a8a;
+        --cv-bg: #e5e1f5;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 6px 20px rgba(0, 0, 0, 0.05);
+      }
+      [data-theme="dark"] {
+        --bg: #161512;
+        --surface: #211f1b;
+        --offset: #2d2b26;
+        --text: #ebe9e3;
+        --muted: #b4b0a6;
+        --border: #3a3731;
+        --core: #6cc3c8;
+        --core-bg: #1f3a3c;
+        --arch: #e6b273;
+        --arch-bg: #44361f;
+        --req: #ee8f9b;
+        --ok: #8fc896;
+        --warn: #e6b86d;
+        --link: #8ab8ee;
+        --cv: #c9c4f5;
+        --cv-bg: #34305a;
+        --shadow: none;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font:
+          15px/1.45 system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+      }
+      a {
+        color: var(--link);
+      }
+      code {
+        font:
+          11.5px ui-monospace,
+          Consolas,
+          monospace;
+        background: var(--offset);
+        padding: 1px 4px;
+        border-radius: 4px;
+        word-break: break-all;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: color-mix(in oklab, var(--bg) 92%, transparent);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        padding: 12px 24px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      h1 {
+        font-size: 18px;
+        flex: 1;
+        min-width: 260px;
+      }
+      h1 small {
+        display: block;
+        font-weight: 400;
+        color: var(--muted);
+        font-size: 12.5px;
+      }
+      button,
+      .btn {
+        font: inherit;
+        font-size: 13px;
+        padding: 7px 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface);
+        color: var(--text);
+        cursor: pointer;
+        text-decoration: none;
+      }
+      button:hover,
+      .btn:hover {
+        border-color: var(--core);
+      }
+      .switch {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 7px 14px;
+        border-radius: 999px;
+        background: var(--arch-bg);
+        color: var(--arch);
+        font-weight: 600;
+        cursor: pointer;
+        user-select: none;
+      }
+      .switch input {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--arch);
+      }
+      main {
+        max-width: 1500px;
+        margin: 0 auto;
+        padding: 20px 24px 24px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 380px;
+        gap: 20px;
+        align-items: start;
+      }
+      @media (max-width: 1250px) {
+        main {
+          grid-template-columns: 1fr 1fr;
+        }
+        .preview {
+          grid-column: 1/-1;
+          position: static !important;
+        }
+      }
+      @media (max-width: 820px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        overflow: visible;
+      }
+      .card-h {
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--border);
+        border-radius: 14px 14px 0 0;
+      }
+      .core .card-h {
+        background: var(--core-bg);
+        border-top: 4px solid var(--core);
+      }
+      .arch .card-h {
+        background: var(--arch-bg);
+        border-top: 4px solid var(--arch);
+      }
+      .card-h h2 {
+        font-size: 17px;
+      }
+      .core h2 {
+        color: var(--core);
+      }
+      .arch h2 {
+        color: var(--arch);
+      }
+      .card-h p {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+      .stats {
+        display: flex;
+        gap: 6px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        font-size: 11.5px;
+        padding: 2px 9px;
+        border-radius: 999px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+      .arch.off .card-body {
+        opacity: 0.4;
+        pointer-events: none;
+        filter: grayscale(0.6);
+      }
+      .off-note {
+        display: none;
+        padding: 10px 18px;
+        background: var(--offset);
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .arch.off .off-note {
+        display: block;
+      }
+      details.sec {
+        border-bottom: 1px solid var(--border);
+      }
+      details.sec:last-child {
+        border-bottom: 0;
+      }
+      summary {
+        padding: 12px 18px;
+        cursor: pointer;
+        font-weight: 650;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        list-style: none;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      summary:before {
+        content: "▸";
+        margin-right: 8px;
+        color: var(--muted);
+        transition: 0.15s;
+      }
+      details[open] > summary:before {
+        transform: rotate(90deg);
+      }
+      summary .n {
+        margin-left: auto;
+        font-weight: 400;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .sec-b {
+        padding: 2px 18px 16px;
+        display: grid;
+        gap: 12px;
+      }
+      .f label {
+        display: flex;
+        gap: 6px;
+        align-items: baseline;
+        font-size: 12.5px;
+        font-weight: 600;
+        margin-bottom: 3px;
+        flex-wrap: wrap;
+      }
+      .req {
+        color: var(--req);
+      }
+      .tag {
+        font-weight: 500;
+        font-size: 10.5px;
+        padding: 1px 6px;
+        border-radius: 5px;
+        background: var(--offset);
+        color: var(--muted);
+        font-family: ui-monospace, Consolas, monospace;
+      }
+      .arch .tag {
+        background: var(--arch-bg);
+        color: var(--arch);
+      }
+      .core .tag {
+        background: var(--core-bg);
+        color: var(--core);
+      }
+      .tag.cv {
+        background: var(--cv-bg) !important;
+        color: var(--cv) !important;
+      }
+      .hint {
+        font-size: 11.5px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      input[type="text"],
+      input[type="url"],
+      input[type="date"],
+      input[type="number"],
+      select,
+      textarea {
+        width: 100%;
+        font: inherit;
+        font-size: 13.5px;
+        padding: 7px 9px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        color: var(--text);
+      }
+      textarea {
+        min-height: 64px;
+        resize: vertical;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: 2px solid var(--core);
+        outline-offset: 0;
+      }
+      .arch input:focus,
+      .arch select:focus,
+      .arch textarea:focus {
+        outline-color: var(--arch);
+      }
+      .obj {
+        border: 1px dashed var(--border);
+        border-radius: 10px;
+        padding: 10px;
+        display: grid;
+        gap: 10px;
+      }
+      .item {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px;
+        position: relative;
+        display: grid;
+        gap: 10px;
+        background: var(--bg);
+      }
+      .item .rm {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        padding: 0 7px;
+        font-size: 15px;
+        line-height: 22px;
+      }
+      .add {
+        font-size: 12.5px;
+        color: var(--muted);
+        border-style: dashed;
+        justify-self: start;
+      }
+      .vblock {
+        border: 1px solid color-mix(in oklab, var(--cv) 35%, var(--border));
+        border-radius: 10px;
+        padding: 10px;
+        display: grid;
+        gap: 8px;
+        background: color-mix(in oklab, var(--cv) 5%, var(--bg));
+      }
+      .vrow {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      @media (max-width: 560px) {
+        .vrow {
+          grid-template-columns: 1fr;
+        }
+      }
+      .vsrc {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .vstat,
+      .vlook {
+        font-size: 12px;
+      }
+      .vstat .ok,
+      .vlook .ok {
+        color: var(--ok);
+      }
+      .vstat .warn,
+      .vlook .warn {
+        color: var(--warn);
+      }
+      .vlook {
+        color: var(--muted);
+      }
+      .sub {
+        font-size: 11.5px;
+        color: var(--muted);
+        margin-bottom: 2px;
+        display: block;
+      }
+      .combo {
+        position: relative;
+      }
+      .lb {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: calc(100% + 3px);
+        z-index: 30;
+        max-height: 290px;
+        overflow: auto;
+        background: var(--surface);
+        border: 1px solid var(--cv);
+        border-radius: 9px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      }
+      .lb[hidden] {
+        display: none;
+      }
+      .opt {
+        padding: 7px 10px;
+        cursor: pointer;
+        border-bottom: 1px solid var(--border);
+        font-size: 13px;
+      }
+      .opt:last-child {
+        border-bottom: 0;
+      }
+      .opt small {
+        display: block;
+        color: var(--muted);
+        font-size: 11.5px;
+        word-break: break-all;
+      }
+      .opt.on,
+      .opt:hover {
+        background: var(--cv-bg);
+      }
+      .covered {
+        padding: 12px 18px 16px;
+        border-top: 1px solid var(--border);
+        background: var(--offset);
+        border-radius: 0 0 14px 14px;
+      }
+      .covered h3 {
+        font-size: 12.5px;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .covered .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .covered .chips span {
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: var(--core-bg);
+        color: var(--core);
+      }
+      .link {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        padding: 9px 11px;
+        border-radius: 9px;
+        background: var(--core-bg);
+        color: var(--core);
+        font-size: 12.5px;
+      }
+      .status {
+        font-size: 12.5px;
+        padding: 8px 11px;
+        border-radius: 9px;
+        border: 1px solid var(--border);
+        display: grid;
+        gap: 3px;
+      }
+      .status .ok {
+        color: var(--ok);
+      }
+      .status .warn {
+        color: var(--warn);
+      }
+      .auto {
+        font-size: 12px;
+        color: var(--muted);
+        padding: 6px 10px;
+        border: 1px dashed var(--border);
+        border-radius: 8px;
+      }
+      .preview {
+        position: sticky;
+        top: 78px;
+      }
+      .preview pre {
+        padding: 14px 16px;
+        font:
+          12px/1.5 ui-monospace,
+          Consolas,
+          monospace;
+        overflow: auto;
+        max-height: 70vh;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .preview .card-h {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+      .preview h2 {
+        font-size: 15px;
+      }
+      .legend {
+        max-width: 1500px;
+        margin: 16px auto 0;
+        padding: 0 24px;
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+      .legend i {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        margin-right: 6px;
+      }
+      .refs {
+        max-width: 1500px;
+        margin: 0 auto 60px;
+        padding: 0 24px;
+      }
+      .refs .card-h {
+        background: var(--cv-bg);
+        border-top: 4px solid var(--cv);
+      }
+      .refs h2 {
+        color: var(--cv);
+      }
+      .refs h3 {
+        font-size: 14px;
+        margin: 16px 18px 8px;
+      }
+      .tw {
+        overflow: auto;
+        padding: 0 18px 16px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 12.5px;
+        min-width: 820px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 7px 9px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+      th {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+      }
+      .note {
+        margin: 12px 18px;
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+      pre.cfg {
+        margin: 0 18px 16px;
+        padding: 12px;
+        background: var(--offset);
+        border-radius: 8px;
+        font:
+          12px/1.5 ui-monospace,
+          Consolas,
+          monospace;
+        overflow: auto;
+      }
+      @media print {
+        header,
+        .legend {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <header>
+      <h1>
+        Sample registration form<small
+          >Two forms: core fields (HSR v0.9) + optional archaeology supplement
+          (IGSN–DataCite Archaeological Sample Metadata Profile v1.0)</small
+        >
+      </h1>
+      <a class="btn" href="#vocabRef">Vocabulary sources ↓</a>
+      <label class="switch"
+        ><input type="checkbox" id="isArch" /> This is an archaeological
+        sample</label
+      >
+      <button id="reset">Reset</button><button id="theme">Dark / light</button>
+    </header>
+    <div class="legend">
+      <span
+        ><i style="background: var(--core)"></i>Form 1 – core, defined by HSR
+        sample schema</span
+      ><span
+        ><i style="background: var(--arch)"></i>Form 2 – supplement, defined by
+        the archaeology profile and not covered by HSR</span
+      ><span
+        ><i style="background: var(--cv)"></i>Controlled vocabulary field (with
+        live lookup where available)</span
+      ><span
+        ><b class="req">*</b> required in source schema or profile when the
+        field is used</span
+      >
+    </div>
+    <main>
+      <section class="card core" id="core">
+        <div class="card-h">
+          <h2>Form 1 · Core sample (HSR)</h2>
+          <p>
+            Always filled in. Actors (creators, custodian, publisher) are chosen
+            here once, as references to Person or Organisation records.
+          </p>
+          <div class="stats" id="coreStats"></div>
+        </div>
+        <div class="card-body" id="coreBody"></div>
+      </section>
+      <section class="card arch off" id="arch">
+        <div class="card-h">
+          <h2>Form 2 · Archaeology supplement</h2>
+          <p>
+            Only for archaeological samples. Holds profile fields that HSR
+            cannot express without losing meaning.
+          </p>
+          <div class="stats" id="archStats"></div>
+        </div>
+        <div class="off-note">
+          Tick “This is an archaeological sample” to enable this form.
+        </div>
+        <div class="card-body" id="archBody"></div>
+        <div class="covered">
+          <h3>
+            Archaeology fields already covered by Form 1 (no duplicate entry
+            needed)
+          </h3>
+          <div class="chips" id="covered"></div>
+        </div>
+      </section>
+      <aside class="card preview">
+        <div class="card-h">
+          <h2>Record preview (JSON)</h2>
+          <button id="copy">Copy</button>
+        </div>
+        <pre id="out"></pre>
+      </aside>
+    </main>
+    <section class="refs" id="vocabRef">
+      <div class="card">
+        <div class="card-h">
+          <h2>Controlled vocabularies used in these forms</h2>
+          <p>
+            Choose a vocabulary in a field, then type at least two characters in
+            the term box: matching concepts appear in a drop-down list. Picking
+            one fills the term, term URI, code and vocabulary. The profile
+            accepts at least one of: vocabulary name, vocabulary URI, term URI
+            or code; term URIs are preferred.
+          </p>
+        </div>
+        <h3>Open vocabularies (term chosen from a thesaurus)</h3>
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th>Archaeology field</th>
+                <th>Form field</th>
+                <th>Recommended vocabulary</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="refOpen"></tbody>
+          </table>
+        </div>
+        <h3>Fixed lists (use the exact published values)</h3>
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th>Archaeology field</th>
+                <th>List</th>
+                <th>Source</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="refFixed"></tbody>
+          </table>
+        </div>
+        <h3>Vocabulary sources and how the lookup works</h3>
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Browse</th>
+                <th>Vocabulary URI written to the record</th>
+                <th>Lookup in this form</th>
+              </tr>
+            </thead>
+            <tbody id="refSrc"></tbody>
+          </table>
+        </div>
+        <h3>Lookup settings (edit in the page script)</h3>
+        <pre class="cfg" id="cfgShow"></pre>
+        <p class="note">
+          Direct browser calls only work if the vocabulary server allows
+          requests from your page (CORS). If a lookup fails, the form says so
+          and you can still type the term and paste its URI. For production, set
+          <code>CONFIG.proxy</code> to your own endpoint (for example a DSpace
+          or Nginx route). The page then calls
+          <code>{proxy}{sourceId}?q=text&amp;limit=25</code> and expects a JSON
+          list of <code>{"uri","label","code","note"}</code>. The server can
+          cache results, hold local copies of FISH and PeriodO, and add the
+          Getty attribution line.
+        </p>
+      </div>
+    </section>
+    <script>
+      const T = (k, l, o = {}) => ({ key: k, label: l, type: "text", ...o }),
+        TA = (k, l, o = {}) => ({ key: k, label: l, type: "textarea", ...o }),
+        D = (k, l, o = {}) => ({ key: k, label: l, type: "date", ...o }),
+        U = (k, l, o = {}) => ({ key: k, label: l, type: "url", ...o }),
+        S = (k, l, opts, o = {}) => ({
+          key: k,
+          label: l,
+          type: "select",
+          opts,
+          ...o,
+        }),
+        O = (k, l, fields, o = {}) => ({
+          key: k,
+          label: l,
+          type: "object",
+          fields,
+          ...o,
+        }),
+        R = (k, l, fields, o = {}) => ({
+          key: k,
+          label: l,
+          type: "repeat",
+          fields,
+          ...o,
+        }),
+        L = (k, l, o = {}) => ({ key: k, label: l, type: "strlist", ...o }),
+        V = (k, l, src, terms, o = {}) => ({
+          key: k,
+          label: l,
+          type: "vocab",
+          src,
+          terms,
+          ...o,
+        });
+      /* ---------- Lookup settings ---------- */
+      const CONFIG = {
+        proxy: "", // e.g. '/api/vocab/' → calls /api/vocab/<sourceId>?q=…&limit=25
+        getty: "https://vocab.getty.edu/sparql.json",
+        heritage: "https://heritagedata.org/live/sparql",
+        periodo: "https://data.perio.do/dataset/",
+        minChars: 2,
+        limit: 25,
+        timeoutMs: 15000,
+        debounceMs: 300,
+      };
+      const FISH = "https://heritage-standards.org.uk/fish-vocabularies/";
+      const SRC = {
+        "getty-aat": {
+          name: "Getty Art & Architecture Thesaurus (AAT)",
+          url: "https://www.getty.edu/research/tools/vocabularies/aat/",
+          uri: "http://vocab.getty.edu/aat",
+          lk: { kind: "getty" },
+        },
+        "fish-event": {
+          name: "FISH Event Thesaurus (Event Types)",
+          url: "https://heritagedata.org/live/schemes/agl_et.html",
+          uri: "http://purl.org/heritagedata/schemes/agl_et",
+          alt: FISH,
+          lk: { kind: "heritage", path: "agl_et" },
+        },
+        "fish-sci": {
+          name: "FISH Archaeological Sciences Thesaurus",
+          url: "https://heritagedata.org/live/schemes/560.html",
+          uri: "https://heritagedata.org/live/schemes/560.html",
+          alt: FISH,
+          lk: { kind: "heritage", path: "560" },
+        },
+        "fish-monument": {
+          name: "FISH Monument Types Thesaurus",
+          url: "https://heritagedata.org/live/schemes/eh_tmt2.html",
+          uri: "https://heritagedata.org/live/schemes/eh_tmt2.html",
+          alt: FISH,
+          lk: { kind: "heritage", path: "eh_tmt2" },
+        },
+        "fish-period": {
+          name: "Historic England Periods List (FISH)",
+          url: "https://heritagedata.org/live/schemes/eh_period.html",
+          uri: "https://heritagedata.org/live/schemes/eh_period.html",
+          alt: FISH,
+          lk: { kind: "heritage", path: "eh_period" },
+        },
+        "fish-object": {
+          name: "FISH Archaeological Objects Thesaurus",
+          url: FISH,
+          uri: FISH,
+          lk: { kind: "heritage", path: "" },
+        },
+        "fish-materials": {
+          name: "FISH Object Materials Thesaurus",
+          url: FISH,
+          uri: FISH,
+          lk: { kind: "heritage", path: "" },
+        },
+        "fish-components": {
+          name: "FISH Components Thesaurus",
+          url: FISH,
+          uri: FISH,
+          lk: { kind: "heritage", path: "" },
+        },
+        periodo: {
+          name: "PeriodO period gazetteer",
+          url: "https://perio.do/",
+          uri: "http://n2t.net/ark:/99152/",
+          lk: { kind: "periodo" },
+        },
+        tdar: {
+          name: "tDAR Data Dictionary – Site Types",
+          url: "https://tdar-arch.atlassian.net/wiki/spaces/TDAR/pages/557203/Site+Types",
+          uri: "https://tdar-arch.atlassian.net/wiki/spaces/TDAR/pages/557203/Site+Types",
+          lk: { kind: "none" },
+        },
+        munsell: {
+          name: "Munsell Soil Color Charts",
+          url: "https://munsell.com/",
+          uri: "https://munsell.com/",
+          lk: { kind: "munsell" },
+        },
+        wrb: {
+          name: "WRB / FAO soil description (ISRIC documents)",
+          url: "https://wrb.isric.org/documents.html",
+          uri: "https://wrb.isric.org/",
+          lk: { kind: "local", list: "SOIL" },
+        },
+        fao: {
+          name: "FAO Guidelines for soil description (2006)",
+          url: "https://www.fao.org/4/a0541e/a0541e.pdf",
+          uri: "https://www.fao.org/4/a0541e/a0541e.pdf",
+          lk: { kind: "local", list: "SOIL" },
+        },
+        datacite: {
+          name: "DataCite Metadata Schema 4.6",
+          url: "https://datacite-metadata-schema.readthedocs.io/en/4.6/",
+          uri: "https://datacite-metadata-schema.readthedocs.io/en/4.6/",
+          lk: { kind: "fixed" },
+        },
+        cc: {
+          name: "Creative Commons licences",
+          url: "https://creativecommons.org/licenses/",
+          uri: "https://creativecommons.org/licenses/",
+          lk: { kind: "fixed" },
+        },
+      };
+      const LK_TEXT = {
+        getty: "Live search: SPARQL endpoint (vocab.getty.edu)",
+        heritage: "Live search: SPARQL endpoint (heritagedata.org)",
+        periodo:
+          "Live search: PeriodO dataset (data.perio.do), downloaded once and searched in the browser",
+        local: "Local pick-list (no public term service)",
+        munsell: "Notation format check only (no open lookup)",
+        none: "Link only (no machine interface found)",
+        fixed: "Fixed list in the dropdowns",
+      };
+      const SOIL = [
+        ["Sand", "S"],
+        ["Loamy sand", "LS"],
+        ["Sandy loam", "SL"],
+        ["Loam", "L"],
+        ["Silt loam", "SiL"],
+        ["Silt", "Si"],
+        ["Sandy clay loam", "SCL"],
+        ["Clay loam", "CL"],
+        ["Silty clay loam", "SiCL"],
+        ["Sandy clay", "SC"],
+        ["Silty clay", "SiC"],
+        ["Clay", "C"],
+      ].map(([label, code]) => ({
+        label,
+        code,
+        uri: "",
+        note: "Textural class (local list – confirm against the edition you adopt)",
+      }));
+      const DC =
+        "https://datacite-metadata-schema.readthedocs.io/en/4.6/appendices/appendix-1/";
+      const ROLES = [
+        "Collector/Excavator",
+        "ContactPerson",
+        "DataCollector",
+        "DataCurator",
+        "DataManager",
+        "Distributor",
+        "Editor",
+        "HostingInstitution",
+        "Producer",
+        "ProjectLeader",
+        "ProjectManager",
+        "ProjectMember",
+        "RegistrationAgency",
+        "RegistrationAuthority",
+        "RelatedPerson",
+        "Researcher",
+        "ResearchGroup",
+        "RightsHolder",
+        "Sponsor",
+        "Supervisor",
+        "Translator",
+        "WorkPackageLeader",
+        "Other",
+      ];
+      const relIdTypes = [
+        "ARK",
+        "arXiv",
+        "bibcode",
+        "CSTR",
+        "DOI",
+        "EAN13",
+        "EISSN",
+        "Handle",
+        "IGSN",
+        "ISBN",
+        "ISSN",
+        "ISTC",
+        "LISSN",
+        "LSID",
+        "PMID",
+        "PURL",
+        "RRID",
+        "UPC",
+        "URL",
+        "URN",
+        "w3id",
+      ];
+      const relTypes = [
+        "Cites",
+        "Collects",
+        "Compiles",
+        "Continues",
+        "Describes",
+        "Documents",
+        "HasMetadata",
+        "HasPart",
+        "HasTranslation",
+        "HasVersion",
+        "IsCitedBy",
+        "IsCollectedBy",
+        "IsCompiledBy",
+        "IsContinuedBy",
+        "IsDerivedFrom",
+        "IsDescribedBy",
+        "IsDocumentedBy",
+        "IsIdenticalTo",
+        "IsMetadataFor",
+        "IsNewVersionOf",
+        "IsObsoletedBy",
+        "IsOriginalFormOf",
+        "IsPartOf",
+        "IsPreviousVersionOf",
+        "IsPublishedIn",
+        "IsReferencedBy",
+        "IsRequiredBy",
+        "IsReviewedBy",
+        "IsSourceOf",
+        "IsSupplementedBy",
+        "IsSupplementTo",
+        "IsTranslationOf",
+        "IsVariantFormOf",
+        "IsVersionOf",
+        "Obsoletes",
+        "References",
+        "Requires",
+        "Reviews",
+      ];
+      const resTypes = [
+        "Audiovisual",
+        "Award",
+        "Book",
+        "BookChapter",
+        "Collection",
+        "ComputationalNotebook",
+        "ConferencePaper",
+        "ConferenceProceeding",
+        "DataPaper",
+        "Dataset",
+        "Dissertation",
+        "Event",
+        "Image",
+        "Instrument",
+        "InteractiveResource",
+        "Journal",
+        "JournalArticle",
+        "Model",
+        "OutputManagementPlan",
+        "PeerReview",
+        "PhysicalObject",
+        "Preprint",
+        "Project",
+        "Report",
+        "Service",
+        "Software",
+        "Sound",
+        "Standard",
+        "StudyRegistration",
+        "Text",
+        "Workflow",
+        "Other",
+      ];
+      const LICENCES = [
+        "CC0 1.0",
+        "CC BY 4.0",
+        "CC BY-SA 4.0",
+        "CC BY-NC 4.0",
+        "CC BY-ND 4.0",
+        "CC BY-NC-SA 4.0",
+        "CC BY-NC-ND 4.0",
+      ];
+      const CORE = [
+        {
+          t: "Identity & type",
+          f: [
+            U("doi", "DOI", { tag: "doi" }),
+            S(
+              "types.resourceType",
+              "Resource type",
+              [
+                "Heritage Sample",
+                "Heritage Feature-of-Interest",
+                "Heritage Sample Collection",
+              ],
+              {
+                req: 1,
+                tag: "types.resourceType",
+                hint: "resourceTypeGeneral is fixed to PhysicalObject.",
+                cv: 1,
+              },
+            ),
+            R(
+              "titles",
+              "Titles / labels",
+              [
+                T("title", "Title", { req: 1 }),
+                S(
+                  "titleType",
+                  "Title type",
+                  [
+                    "Title",
+                    "AlternativeTitle",
+                    "Subtitle",
+                    "TranslatedTitle",
+                    "Other",
+                  ],
+                  { req: 1, cv: 1 },
+                ),
+                T("lang", "Language"),
+                {
+                  key: "isCustodianIdentifier",
+                  label: "Title is the custodian’s identifier",
+                  type: "check",
+                },
+              ],
+              { req: 1, tag: "titles[]", arch: "7 sampleTitle" },
+            ),
+            R(
+              "alternateIdentifiers",
+              "Alternate identifiers",
+              [
+                T("alternateIdentifier", "Identifier", { req: 1 }),
+                T("alternateIdentifierType", "Identifier type", { req: 1 }),
+              ],
+              { tag: "alternateIdentifiers[]", arch: "10 otherIdentifier" },
+            ),
+            O(
+              "documentationIdentifier",
+              "Documentation identifier",
+              [
+                T("relatedIdentifier", "Identifier", { req: 1 }),
+                S("relatedIdentifierType", "Identifier type", relIdTypes, {
+                  req: 1,
+                  cv: 1,
+                }),
+              ],
+              { tag: "documentationIdentifier" },
+            ),
+          ],
+        },
+        {
+          t: "Source object & sampling position",
+          f: [
+            O(
+              "sampleSource",
+              "Sample source",
+              [
+                T("sourceId", "Source ID (HeritageObject or Sample handle)", {
+                  req: 1,
+                }),
+                T("sourceLabel", "Source label"),
+                S(
+                  "sourceType",
+                  "Source type",
+                  ["painting", "sculpture", "book"],
+                  { req: 1, cv: 1 },
+                ),
+                TA(
+                  "sampleSiteDescription",
+                  "Sample site description (position on the source)",
+                  { req: 1 },
+                ),
+                U(
+                  "sampleSiteAnnotationUrl",
+                  "Sample site annotation URL (IIIF manifest or PID page)",
+                ),
+              ],
+              {
+                req: 1,
+                tag: "sampleSource",
+                arch: "13.2 siteDiagram (link only)",
+              },
+            ),
+          ],
+        },
+        {
+          t: "Description & material",
+          f: [
+            R(
+              "otherDescriptions",
+              "Descriptions",
+              [
+                TA("description", "Description", { req: 1 }),
+                S(
+                  "descriptionType",
+                  "Description type",
+                  [
+                    "Sample description",
+                    "Sampling method",
+                    "Reason for sampling",
+                    "Other",
+                  ],
+                  { req: 1, cv: 1 },
+                ),
+              ],
+              {
+                tag: "otherDescriptions[]",
+                arch: "8 Description · 12 collectionMethod",
+              },
+            ),
+            S(
+              "sampleType",
+              "Sample type",
+              [
+                "Borehole",
+                "Cross section",
+                "Fragment",
+                "Scraping",
+                "Thin section",
+              ],
+              { tag: "sampleType", cv: 1 },
+            ),
+            L("materialTerms", "Material terms (VocabularyConcept handles)", {
+              tag: "materialTerms[]",
+              arch: "16 sampleMaterialType · 16.1",
+              cv: 1,
+              hint: "Controlled: choose concepts from the HSR vocabulary service. Recommended sources: Getty AAT (materials) and FISH Object Materials. See the vocabulary table below.",
+            }),
+            R(
+              "subjects",
+              "Subjects / keywords",
+              [
+                T("subject", "Subject", { req: 1 }),
+                T("subjectScheme", "Scheme", {
+                  list: [
+                    "Getty AAT",
+                    "FISH Archaeological Objects Thesaurus",
+                    "FISH Monument Types Thesaurus",
+                    "FISH Archaeological Sciences Thesaurus",
+                  ],
+                }),
+                U("schemeUri", "Scheme URI"),
+                U("valueUri", "Value URI"),
+                T("classificationCode", "Classification code"),
+              ],
+              {
+                tag: "subjects[]",
+                arch: "9 Subject · 20 generalKeywords",
+                cv: 1,
+              },
+            ),
+            L("sizes", "Sizes incl. unit, e.g. “weight 653 g”, “depth 10 cm”", {
+              tag: "sizes[]",
+              arch: "14 sampleDepth · 15 sampleWeight",
+              hint: "Use SI units: mm, cm, m, mg, g, kg.",
+            }),
+          ],
+        },
+        {
+          t: "Actors (single source of truth)",
+          f: [
+            L(
+              "creators",
+              "Creators / collectors (Person or Organisation handles)",
+              {
+                req: 1,
+                tag: "creators[]",
+                arch: "4 collectorExcavator · 6 Contributor",
+                hint: "Include everyone who created, collected or processed the sample. Archaeology roles are assigned in Form 2.",
+              },
+            ),
+            T("custodian", "Custodian (Organisation or Person handle)", {
+              req: 1,
+              tag: "custodian",
+            }),
+            T("publisher", "Publisher (Organisation handle)", {
+              req: 1,
+              tag: "publisher",
+              arch: "5 Publisher · 5.1 ROR",
+            }),
+            T("publicationYear", "Publication year", {
+              tag: "publicationYear",
+            }),
+          ],
+        },
+        {
+          t: "Dates",
+          f: [
+            O(
+              "dates",
+              "Dates",
+              [
+                D("collectedDate", "Collected"),
+                D("mountedDate", "Mounted"),
+                D("consumedDate", "Consumed"),
+                D("destroyedDate", "Destroyed"),
+                D("publishedDate", "Published", { req: 1 }),
+              ],
+              { req: 1, tag: "dates", arch: "11 collectionDate" },
+            ),
+          ],
+        },
+        {
+          t: "Funding, rights & relations",
+          f: [
+            T("version", "Version (major.minor)", { tag: "version" }),
+            R(
+              "fundingReferences",
+              "Funding references",
+              [
+                T("funderName", "Funder name", { req: 1 }),
+                T("funderIdentifier", "Funder identifier"),
+                S(
+                  "funderIdentifierType",
+                  "Identifier type",
+                  ["ISNI", "GRID", "Crossref Funder ID", "ROR", "Other"],
+                  { cv: 1 },
+                ),
+                T("awardNumber", "Award number"),
+                U("awardUri", "Award URI"),
+                T("awardTitle", "Award title"),
+              ],
+              { tag: "fundingReferences[]" },
+            ),
+            R(
+              "rightsList",
+              "Rights",
+              [
+                T("rights", "Rights"),
+                U("rightsUri", "Rights URI"),
+                T("rightsIdentifier", "Rights identifier"),
+                T("rightsIdentifierScheme", "Scheme"),
+                U("schemeUri", "Scheme URI"),
+              ],
+              { tag: "rightsList[]" },
+            ),
+            R(
+              "relatedIdentifiers",
+              "Related identifiers",
+              [
+                T("relatedIdentifier", "Identifier", { req: 1 }),
+                S("relatedIdentifierType", "Identifier type", relIdTypes, {
+                  req: 1,
+                  cv: 1,
+                }),
+                S("relationType", "Relation type", relTypes, {
+                  req: 1,
+                  cv: 1,
+                  hint: "Direction matters: IsDerivedFrom (this sample came from the target) vs IsSourceOf.",
+                }),
+                T(
+                  "relatedMetadataScheme",
+                  "Metadata scheme (HasMetadata / IsMetadataFor only)",
+                ),
+                U("schemeUri", "Scheme URI"),
+                T("schemeType", "Scheme type"),
+                S("resourceTypeGeneral", "Related resource type", resTypes, {
+                  cv: 1,
+                }),
+              ],
+              { tag: "relatedIdentifiers[]", arch: "22 Relations" },
+            ),
+          ],
+        },
+      ];
+      const ARCH = [
+        {
+          t: "1 · Project & site",
+          f: [
+            O(
+              "project",
+              "Project / site",
+              [
+                T("title", "Project or site title", { req: 1, arch: "1" }),
+                TA("description", "Project description", { arch: "1.1" }),
+                T("agencyIdentifier", "Agency / site identifier", {
+                  arch: "1.3",
+                  hint: "e.g. Smithsonian Trinomial",
+                }),
+              ],
+              { req: 1 },
+            ),
+            O("site", "Site details", [
+              T("owner", "Site owner", {
+                arch: "1.5",
+                hint: "Default “Private”. e.g. Sydney Harbour Foreshore Authority",
+              }),
+              V(
+                "temporalCoverage",
+                "Site temporal coverage",
+                ["periodo", "fish-period", "getty-aat"],
+                [
+                  "Bronze Age",
+                  "Medieval",
+                  "Mesolithic",
+                  "Middle Iron Age",
+                  "Jacobean",
+                ],
+                {
+                  arch: "1.4 · 1.4.1",
+                  hint: "Use a period authority that matches the site’s region.",
+                },
+              ),
+              V(
+                "type",
+                "Site type",
+                ["getty-aat", "fish-monument", "tdar"],
+                ["Cemetery", "Cave settlement", "Castle", "Monastery"],
+                { arch: "1.6 · 1.6.1" },
+              ),
+              L("keywords", "Site keywords (free text)", { arch: "1.7" }),
+            ]),
+          ],
+        },
+        {
+          t: "2–3 · Investigation",
+          f: [
+            O(
+              "investigation",
+              "Investigation",
+              [
+                V(
+                  "type",
+                  "Investigation type",
+                  ["fish-event"],
+                  [
+                    "Survey",
+                    "Excavation",
+                    "field survey",
+                    "measured survey",
+                    "grab sampling",
+                    "auger survey",
+                    "remote sensing",
+                  ],
+                  {
+                    arch: "2 · 2.1",
+                    hint: "FISH Event Thesaurus covers both intrusive and non-damaging survey events.",
+                  },
+                ),
+                D("startDate", "Start date", { req: 1, arch: "3.1" }),
+                D("endDate", "End date", { req: 1, arch: "3.2" }),
+              ],
+              { req: 1, hint: "Dates are mandatory in the profile." },
+            ),
+          ],
+        },
+        {
+          t: "4 · 6 · Actor roles",
+          f: [
+            { key: "__actorInfo", type: "info" },
+            R(
+              "actorRoles",
+              "Role assignments",
+              [
+                S("actor", "Actor (chosen in Form 1)", "ACTORS", {
+                  req: 1,
+                  hint: "Only actors entered in Form 1 can be selected. Name, ORCID, affiliation and ROR come from the linked Person/Organisation record.",
+                }),
+                S("role", "Archaeology role", ROLES, {
+                  req: 1,
+                  cv: 1,
+                  hint: "Collector/Excavator = profile field 4 (profile category). All other values = profile field 6.1, the DataCite 4.6 contributorType list.",
+                }),
+              ],
+              { arch: "4 · 6.1" },
+            ),
+            { key: "__actorStatus", type: "status" },
+          ],
+        },
+        {
+          t: "12 · Collection method",
+          f: [
+            O("collection", "Collection", [
+              V(
+                "method",
+                "Collection method (controlled term)",
+                ["fish-event", "fish-sci", "getty-aat"],
+                ["Core", "Scoop", "grab sampling"],
+                {
+                  arch: "12 · 12.1",
+                  req: 1,
+                  hint: "The free-text method stays in Form 1 as a “Sampling method” description. Here you classify it.",
+                },
+              ),
+              T("housing", "Sample housing", {
+                arch: "12.2",
+                req: 1,
+                hint: "e.g. Ziplock bag, Sterile container",
+                list: [
+                  "Ziplock bag",
+                  "Sterile container",
+                  "Polycarbonate storage box (long-term archival)",
+                ],
+              }),
+              U("photoUrl", "Sample photo URL", { arch: "12.3" }),
+              T("photoLicence", "Photo licence", {
+                arch: "12.3.1",
+                hint: "Required if a photo is given. Pick a licence or type another.",
+                list: LICENCES,
+                cv: 1,
+              }),
+            ]),
+          ],
+        },
+        {
+          t: "13 · Stratigraphic context",
+          f: [
+            O("context", "Context", [
+              T("id", "Context identifier", {
+                arch: "13",
+                hint: "Site-specific unit ID, e.g. A301. Mandatory for surveys and excavations.",
+              }),
+              V(
+                "type",
+                "Context type",
+                ["getty-aat", "fish-components"],
+                ["Grave", "Storage pit", "Sunken house"],
+                { arch: "13.1 · 13.1.1" },
+              ),
+              R(
+                "zones",
+                "Zones",
+                [
+                  T("type", "Zone type", {
+                    hint: "Area, Trench, Transect… (free text, project-specific)",
+                    list: ["Area", "Trench", "Transect", "Quadrant"],
+                  }),
+                  T("id", "Zone ID", { req: 1 }),
+                ],
+                { arch: "13.3" },
+              ),
+              U("diagramUrl", "Site diagram URL", { arch: "13.2" }),
+              T("diagramLicence", "Diagram licence", {
+                arch: "13.2.1",
+                hint: "Required if a diagram is given.",
+                list: LICENCES,
+                cv: 1,
+              }),
+              V(
+                "soilTexture",
+                "Soil texture",
+                ["wrb", "fao", "getty-aat"],
+                ["Sandy silt"],
+                {
+                  arch: "13.4 · 13.4.1",
+                  hint: "Record which standard and edition you used. A soil texture class is not a WRB soil group.",
+                },
+              ),
+              TA("description", "Context description", { arch: "13.5" }),
+            ]),
+          ],
+        },
+        {
+          t: "14–15 · Measurement details",
+          f: [
+            O(
+              "measurements",
+              "Measurements",
+              [
+                T("depthReferencePoint", "Depth reference point", {
+                  arch: "14.2",
+                  hint: "e.g. Top lens",
+                }),
+                T("weightConditions", "Weight conditions", {
+                  arch: "15.2",
+                  hint: "e.g. Cleaned, With soil, Dried, Humid",
+                  list: ["Cleaned", "With soil", "Dried", "Humid"],
+                }),
+              ],
+              { hint: "Value and unit are entered in Form 1 under “Sizes”." },
+            ),
+          ],
+        },
+        {
+          t: "17 · Colour",
+          f: [
+            O("colour", "Colour", [
+              V(
+                "value",
+                "Colour",
+                ["munsell", "getty-aat"],
+                ["2.5YR 3/3 Dark Reddish Brown"],
+                {
+                  arch: "17 · 17.1",
+                  hint: "Use Munsell notation only when matched against a chart, e.g. 2.5YR 3/3.",
+                },
+              ),
+              T("area", "Coloured area", {
+                arch: "17.2",
+                hint: "e.g. Urn handle",
+              }),
+            ]),
+          ],
+        },
+        {
+          t: "18–19 · Dating",
+          f: [
+            O("absoluteDating", "Absolute dating", [
+              T("range", "Age or range (ISO 8601)", {
+                arch: "18",
+                hint: "e.g. -300/-150",
+              }),
+              V(
+                "method",
+                "Dating method",
+                ["fish-sci", "getty-aat"],
+                ["Radiocarbon dating", "tree-ring analysis"],
+                { arch: "18.1 · 18.2" },
+              ),
+            ]),
+            O("relativeDating", "Relative dating", [
+              V(
+                "term",
+                "Period / cultural term",
+                ["periodo", "fish-period", "getty-aat"],
+                ["PaleoIndian", "Archaic"],
+                { arch: "19 · 19.1" },
+              ),
+            ]),
+          ],
+        },
+        {
+          t: "21 · Current status & access",
+          f: [
+            O("currentStatus", "Current status", [
+              T("value", "Status", {
+                arch: "21",
+                hint: "e.g. Archived, Destroyed",
+                list: ["Archived", "Destroyed", "Lost", "Degraded"],
+                cv: 1,
+              }),
+              D("statusDate", "Status revised on", { arch: "21" }),
+              T("storageLocation", "Storage location", {
+                arch: "21.1",
+                hint: "e.g. Archaeological collection of The British Museum",
+              }),
+              O("accessConditions", "Access conditions", [
+                S(
+                  "type",
+                  "Access status (repository list)",
+                  [
+                    "Open access",
+                    "Embargoed",
+                    "Access on request",
+                    "Restricted",
+                  ],
+                  {
+                    arch: "21.2",
+                    cv: 1,
+                    hint: "Repository-defined list: the profile only exemplifies “Open access, Embargoed”.",
+                  },
+                ),
+                TA("statement", "Statement / contact", {
+                  hint: "e.g. Access to the sample is upon request. Please contact …",
+                }),
+              ]),
+              S("accessType", "Access type", ["Public", "Private"], {
+                arch: "21.2.1",
+                cv: 1,
+                hint: "Fixed binary choice from the profile.",
+              }),
+            ]),
+          ],
+        },
+      ];
+      const COVERED = [
+        "5 Publisher",
+        "5.1 ROR",
+        "7 sampleTitle",
+        "8 Description",
+        "9 Subject",
+        "9.1 subjectClassification",
+        "10 otherIdentifier",
+        "11 collectionDate",
+        "12 collectionMethod (free text)",
+        "14 sampleDepth",
+        "14.1 depthUnits",
+        "15 sampleWeight",
+        "15.1 weightUnits",
+        "16 sampleMaterialType",
+        "16.1 materialClassification",
+        "20 generalKeywords",
+        "22 Relations (22.1–22.5)",
+        "4.1–4.6 collector name/ORCID/affiliation/ROR",
+        "6.2–6.7 contributor name/ORCID/affiliation/ROR",
+        "1.2 siteLocation (via source object geoLocations)",
+        "12.3 samplePhoto (link)",
+        "13.2 siteDiagram (link)",
+      ];
+      const REF_OPEN = [
+        [
+          "1.4 siteTemporalCoverage · 1.4.1",
+          "Form 2 → Site temporal coverage",
+          ["periodo", "fish-period", "getty-aat"],
+          "Profile names RCHME Period List and PeriodO. Historic England Periods supersedes the old FISH Periods List. Pick the authority that fits the region.",
+        ],
+        [
+          "1.6 siteType · 1.6.1",
+          "Form 2 → Site type",
+          ["getty-aat", "fish-monument", "tdar"],
+          "Getty AAT and tDAR are named in the profile. FISH Monument Types suits British and Irish sites.",
+        ],
+        [
+          "2 investigationType · 2.1",
+          "Form 2 → Investigation type",
+          ["fish-event"],
+          "Profile names the FISH Event Types Thesaurus. It covers both intrusive events and survey events.",
+        ],
+        [
+          "9 Subject · 9.1",
+          "Form 1 → Subjects",
+          ["getty-aat", "fish-object", "fish-monument"],
+          "Profile names Getty AAT, the MDA Archaeological Object Thesaurus (now maintained by FISH) and the Monument Types Thesaurus.",
+        ],
+        [
+          "12 collectionMethod · 12.1",
+          "Form 2 → Collection method",
+          ["fish-event", "fish-sci", "getty-aat"],
+          "The profile gives no named scheme. These are suggestions: recovery techniques sit in FISH Archaeological Sciences, sampling events in FISH Event.",
+        ],
+        [
+          "13.1 contextType · 13.1.1",
+          "Form 2 → Context type",
+          ["getty-aat", "fish-components"],
+          "Profile names Getty AAT. FISH Components covers features such as post holes.",
+        ],
+        [
+          "13.4 soilTexture · 13.4.1",
+          "Form 2 → Soil texture",
+          ["wrb", "fao"],
+          "Profile names the FAO World Reference Base. Record the standard and its edition. Texture classes come from the FAO soil-description guidance.",
+        ],
+        [
+          "16 sampleMaterialType · 16.1",
+          "Form 1 → Material terms",
+          ["getty-aat", "fish-materials"],
+          "Profile names Getty AAT. Selected through HSR VocabularyConcept records.",
+        ],
+        [
+          "17 Colour · 17.1",
+          "Form 2 → Colour",
+          ["munsell", "getty-aat"],
+          "Profile names the Munsell colour system.",
+        ],
+        [
+          "18.1 datingMethod · 18.2",
+          "Form 2 → Dating method",
+          ["fish-sci", "getty-aat"],
+          "Profile names the Dating Techniques concept of the FISH Archaeological Sciences Thesaurus.",
+        ],
+        [
+          "19 relativeDating · 19.1",
+          "Form 2 → Period / cultural term",
+          ["periodo", "fish-period", "getty-aat"],
+          "Profile names Getty AAT. Period gazetteers give stable identifiers for periods.",
+        ],
+      ];
+      const REF_FIXED = [
+        [
+          "6.1 Role",
+          "Form 2 → Archaeology role",
+          ["DataCite contributorType (4.6)", DC + "contributorType/"],
+          "Collector/Excavator is a profile category for field 4 and is not a DataCite value. Translator was added in 4.6.",
+        ],
+        [
+          "22.2 identifierType",
+          "Form 1 → Related identifiers",
+          [
+            "DataCite relatedIdentifierType (4.6)",
+            DC + "relatedIdentifierType/",
+          ],
+          "4.6 added CSTR and RRID.",
+        ],
+        [
+          "22.3 relationType",
+          "Form 1 → Related identifiers",
+          ["DataCite relationType (4.6)", DC + "relationType/"],
+          "Use the full list for the DataCite version in force.",
+        ],
+        [
+          "22.5 relatedResource",
+          "Form 1 → Related identifiers",
+          ["DataCite resourceTypeGeneral (4.6)", DC + "resourceTypeGeneral/"],
+          "The profile gives this list as its example vocabulary.",
+        ],
+        [
+          "4.1.1 / 6.2.1 nameType",
+          "Derived (no input)",
+          [
+            "Profile: Personal / Organizational",
+            "https://datacite-metadata-schema.readthedocs.io/en/4.6/properties/creator/",
+          ],
+          "Set from the linked record: Person → Personal, Organisation → Organizational.",
+        ],
+        [
+          "21.2.1 accessType",
+          "Form 2 → Access type",
+          ["Profile: Public / Private", ""],
+          "Binary choice defined by the profile.",
+        ],
+        [
+          "21.2 accessConditions",
+          "Form 2 → Access conditions",
+          ["Repository-defined list", ""],
+          "Proposed values, not an official list. The profile suggests a controlled vocabulary and shows “Open access” and “Embargoed”.",
+        ],
+        [
+          "12.3.1 photoLicence · 13.2.1 siteDiagramLicence",
+          "Form 2 → Licences",
+          [
+            "Creative Commons licences",
+            "https://creativecommons.org/licenses/",
+          ],
+          "Examples in the profile are CC BY-SA 4.0 and CC BY 4.0. Other licences are allowed.",
+        ],
+      ];
+
+      let state = {},
+        arch = false;
+      const esc = (s) =>
+        String(s ?? "").replace(
+          /[&<>"]/g,
+          (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
+        );
+      const get = (o, p) => p.split(".").reduce((a, k) => a?.[k], o);
+      const set = (o, p, v) => {
+        const ks = p.split(".");
+        ks.slice(0, -1).forEach((k) => (o = o[k] ??= {}));
+        o[ks.at(-1)] = v;
+      };
+      const idOf = (p) => "dl-" + p.replace(/[^a-z0-9]/gi, "-");
+      function actorList() {
+        const m = new Map(),
+          add = (h, r) => {
+            h = (h || "").trim();
+            if (!h) return;
+            if (!m.has(h)) m.set(h, []);
+            if (!m.get(h).includes(r)) m.get(h).push(r);
+          };
+        (state.core.creators || []).forEach((h) => add(h, "creator"));
+        add(state.core.custodian, "custodian");
+        add(state.core.publisher, "publisher");
+        return [...m].map(([h, r]) => ({
+          v: h,
+          l: `${h}  ·  Form 1: ${r.join(", ")}`,
+        }));
+      }
+      function optHtml(f, v) {
+        if (f.opts === "ACTORS") {
+          const a = actorList(),
+            has = a.some((x) => x.v === v);
+          let h = `<option value="">${a.length ? "— select an actor —" : "— add actors in Form 1 first —"}</option>`;
+          h += a
+            .map(
+              (x) =>
+                `<option value="${esc(x.v)}" ${x.v === v ? "selected" : ""}>${esc(x.l)}</option>`,
+            )
+            .join("");
+          if (v && !has)
+            h += `<option value="${esc(v)}" selected>⚠ ${esc(v)} (no longer in Form 1)</option>`;
+          return h;
+        }
+        return (
+          `<option value="">—</option>` +
+          f.opts
+            .map(
+              (o) => `<option ${v === o ? "selected" : ""}>${esc(o)}</option>`,
+            )
+            .join("")
+        );
+      }
+      const label = (f) =>
+        `<label>${esc(f.label)}${f.req ? '<span class="req">*</span>' : ""}${f.tag ? `<span class="tag">${esc(f.tag)}</span>` : ""}${f.arch ? `<span class="tag">archaeology ${esc(f.arch)}</span>` : ""}${f.cv ? '<span class="tag cv">controlled</span>' : ""}</label>`;
+      const kindOf = (id) => SRC[id]?.lk?.kind || null;
+      const liveKinds = ["getty", "heritage", "periodo", "local", "munsell"];
+      function vocabCtl(f, path, root) {
+        const v = get(root, path) || {},
+          sel = v._src || "",
+          other = sel === "other",
+          k = kindOf(sel);
+        const opts =
+          f.src
+            .map(
+              (id) =>
+                `<option value="${id}" ${sel === id ? "selected" : ""}>${esc(SRC[id].name)}</option>`,
+            )
+            .join("") +
+          `<option value="other" ${other ? "selected" : ""}>Other vocabulary…</option>`;
+        const s = SRC[sel];
+        const info = s
+          ? `<div class="vsrc">Browse: <a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.url)}</a>${s.alt && s.alt !== s.url ? ` · <a href="${esc(s.alt)}" target="_blank" rel="noopener">FISH overview</a>` : ""}<br>Vocabulary URI: <code>${esc(s.uri)}</code><br>Lookup: ${esc(LK_TEXT[k] || "")}</div>`
+          : other
+            ? ""
+            : `<div class="vsrc">Recommended: ${f.src.map((id) => `<a href="${esc(SRC[id].url)}" target="_blank" rel="noopener">${esc(SRC[id].name)}</a>`).join(" · ")}</div>`;
+        const live = liveKinds.includes(k);
+        return `<div class="vblock" data-vpath="${path}">${label(f)}
+  <div><span class="sub">Vocabulary</span><select data-vsrc="${path}"><option value="">— choose vocabulary —</option>${opts}</select></div>${info}
+  ${other ? `<div class="vrow"><div><span class="sub">Vocabulary name</span><input type="text" data-p="${path}.vocabularyName" value="${esc(v.vocabularyName)}"></div><div><span class="sub">Vocabulary URI</span><input type="url" data-p="${path}.vocabularyUri" value="${esc(v.vocabularyUri)}"></div></div>` : ""}
+  <div><span class="sub">Term ${live && k !== "munsell" ? "(type to search the vocabulary)" : ""}</span><div class="combo"><input type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" autocomplete="off" data-vq="${path}" data-p="${path}.term" value="${esc(v.term)}" placeholder="${live && k !== "munsell" ? "Type at least " + CONFIG.minChars + " characters…" : "Type the term"}" ${live ? "" : `list="${idOf(path)}"`}><div class="lb" role="listbox" hidden></div></div>${live ? "" : `<datalist id="${idOf(path)}">${(f.terms || []).map((t) => `<option value="${esc(t)}">`).join("")}</datalist>`}<div class="vlook" aria-live="polite"></div></div>
+  <div class="vrow"><div><span class="sub">Term URI (preferred)</span><input type="url" data-p="${path}.termUri" value="${esc(v.termUri)}" placeholder="https://…"></div><div><span class="sub">Classification code</span><input type="text" data-p="${path}.code" value="${esc(v.code)}"></div></div>
+  <div class="vstat"></div>${f.hint ? `<div class="hint">${esc(f.hint)}</div>` : ""}</div>`;
+      }
+      function ctl(f, path, root) {
+        const v = get(root, path);
+        if (f.type === "info")
+          return `<div class="link">🔗 <span>Actors are entered once in Form 1 (creators, custodian, publisher). Here you only assign an archaeology role to them. The custodian is exported automatically as <b>HostingInstitution</b> unless you assign a different role.</span></div>`;
+        if (f.type === "status")
+          return `<div class="status" id="actorStatus"></div>`;
+        if (f.type === "vocab") return vocabCtl(f, path, root);
+        if (f.type === "check")
+          return `<label style="font-weight:500"><input type="checkbox" data-p="${path}" ${v ? "checked" : ""}> ${esc(f.label)}</label>`;
+        let c = "";
+        if (f.type === "textarea")
+          c = `<textarea data-p="${path}">${esc(v)}</textarea>`;
+        else if (f.type === "select")
+          c = `<select data-p="${path}" ${f.opts === "ACTORS" ? 'data-actor="1"' : ""}>${optHtml(f, v)}</select>`;
+        else if (f.type === "object")
+          c = `<div class="obj">${f.fields.map((x) => `<div class="f">${ctl(x, path + "." + x.key, root)}</div>`).join("")}</div>`;
+        else if (f.type === "repeat") {
+          const a = get(root, path) || [];
+          c = `<div style="display:grid;gap:10px">${a.map((it, i) => `<div class="item"><button class="rm" data-rm="${path}" data-i="${i}" title="Remove">×</button>${f.fields.map((x) => `<div class="f">${ctl(x, path + "." + i + "." + x.key, root)}</div>`).join("")}</div>`).join("")}<button class="add" data-add="${path}">+ Add ${esc(f.label.toLowerCase())}</button></div>`;
+        } else if (f.type === "strlist") {
+          const a = get(root, path) || [];
+          c = `<div style="display:grid;gap:6px">${a.map((x, i) => `<div style="display:flex;gap:6px"><input type="text" data-p="${path}.${i}" value="${esc(x)}"><button data-rm="${path}" data-i="${i}">×</button></div>`).join("")}<button class="add" data-add="${path}" data-str="1">+ Add</button></div>`;
+        } else
+          c = `<input type="${f.type}" data-p="${path}" value="${esc(v)}" ${f.list ? `list="${idOf(path)}"` : ""}>${f.list ? `<datalist id="${idOf(path)}">${f.list.map((t) => `<option value="${esc(t)}">`).join("")}</datalist>` : ""}`;
+        return (
+          label(f) +
+          c +
+          (f.hint ? `<div class="hint">${esc(f.hint)}</div>` : "")
+        );
+      }
+      function draw(id, secs, key) {
+        const root = state[key];
+        document.getElementById(id).innerHTML = secs
+          .map(
+            (s, i) =>
+              `<details class="sec" ${i < 2 ? "open" : ""}><summary>${esc(s.t)}<span class="n">${s.f.filter((f) => !/info|status/.test(f.type)).length} group${s.f.length > 1 ? "s" : ""}</span></summary><div class="sec-b">${s.f.map((f) => `<div class="f">${ctl(f, f.key, root)}</div>`).join("")}</div></details>`,
+          )
+          .join("");
+      }
+      function count(fs) {
+        let n = 0,
+          r = 0,
+          c = 0;
+        const w = (f) => {
+          if (f.type === "info" || f.type === "status") return;
+          if (f.fields) f.fields.forEach(w);
+          else {
+            n++;
+            if (f.req) r++;
+            if (f.cv || f.type === "vocab") c++;
+          }
+        };
+        fs.forEach((s) => s.f.forEach(w));
+        return [n, r, c];
+      }
+      function stats() {
+        for (const [id, secs, l] of [
+          ["coreStats", CORE, "HSR"],
+          ["archStats", ARCH, "archaeology"],
+        ]) {
+          const [n, r, c] = count(secs);
+          document.getElementById(id).innerHTML =
+            `<span class="chip">${secs.length} sections</span><span class="chip">${n} input fields</span><span class="chip">${r} marked required</span><span class="chip">${c} controlled-vocabulary fields</span><span class="chip">source: ${l === "HSR" ? "hsr-sample schema v0.8/0.9" : "Archaeology profile v1.0"}</span>`;
+        }
+      }
+      function clean(v) {
+        if (Array.isArray(v)) {
+          const a = v.map(clean).filter((x) => x !== undefined);
+          return a.length ? a : undefined;
+        }
+        if (v && typeof v === "object") {
+          const o = {};
+          for (const [k, x] of Object.entries(v)) {
+            if (k[0] === "_") continue;
+            const c = clean(x);
+            if (c !== undefined) o[k] = c;
+          }
+          if (
+            ("vocabularyName" in o || "vocabularyUri" in o) &&
+            !o.term &&
+            !o.termUri &&
+            !o.code
+          )
+            return undefined;
+          return Object.keys(o).length ? o : undefined;
+        }
+        return v === "" || v === false || v == null ? undefined : v;
+      }
+      function effectiveRoles() {
+        const known = new Set(actorList().map((a) => a.v));
+        const rows = (state.arch.actorRoles || [])
+          .filter((r) => r.actor && r.role && known.has(r.actor))
+          .map((r) => ({ actor: r.actor, role: r.role }));
+        const c = (state.core.custodian || "").trim();
+        if (c && !rows.some((r) => r.actor === c))
+          rows.push({
+            actor: c,
+            role: "HostingInstitution",
+            assigned: "automatic",
+          });
+        return rows;
+      }
+      function refreshActors() {
+        document.querySelectorAll("select[data-actor]").forEach((s) => {
+          s.innerHTML = optHtml(
+            { opts: "ACTORS" },
+            s.value || get(state.arch, s.dataset.p),
+          );
+        });
+        const st = document.getElementById("actorStatus");
+        if (!st) return;
+        const list = actorList(),
+          roles = effectiveRoles(),
+          assigned = new Set(roles.map((r) => r.actor));
+        const unassigned = list
+            .filter((a) => !assigned.has(a.v))
+            .map((a) => a.v),
+          stale = (state.arch.actorRoles || [])
+            .filter((r) => r.actor && !list.some((a) => a.v === r.actor))
+            .map((r) => r.actor);
+        const hasCol = roles.some((r) => r.role === "Collector/Excavator");
+        st.innerHTML =
+          `<div class="${hasCol ? "ok" : "warn"}">${hasCol ? "✓" : "⚠"} Collector/Excavator (profile field 4, mandatory): ${hasCol ? "assigned" : "no actor assigned yet"}</div>` +
+          `<div>${list.length} actor${list.length === 1 ? "" : "s"} in Form 1 · ${list.length - unassigned.length} with a role</div>` +
+          (unassigned.length
+            ? `<div class="warn">No role yet: ${unassigned.map(esc).join(", ")}</div>`
+            : "") +
+          (stale.length
+            ? `<div class="warn">Not in Form 1 any more: ${stale.map(esc).join(", ")}</div>`
+            : "") +
+          (state.core.custodian
+            ? `<div class="auto">Custodian ${esc(state.core.custodian)} → HostingInstitution (automatic unless you assign another role)</div>`
+            : "");
+      }
+      function refreshVocab() {
+        document.querySelectorAll(".vblock").forEach((b) => {
+          const v = get(state.arch, b.dataset.vpath) || {},
+            st = b.querySelector(".vstat");
+          if (!st) return;
+          const hasId =
+            v.vocabularyName || v.vocabularyUri || v.termUri || v.code;
+          st.innerHTML =
+            !v.term && !v.termUri && !v.code
+              ? ""
+              : hasId
+                ? '<span class="ok">✓ Term is identified by a vocabulary, URI or code' +
+                  (v.termUri ? "" : " · adding a term URI is preferred") +
+                  "</span>"
+                : '<span class="warn">⚠ Add at least one of: vocabulary, term URI or code (profile: classification is mandatory with a term)</span>';
+        });
+      }
+      function out() {
+        const c = clean(state.core) || {},
+          o = { ...c };
+        if (o.types || o.titles)
+          o.types = {
+            ...(o.types || {}),
+            resourceTypeGeneral: "PhysicalObject",
+          };
+        if (arch) {
+          const a = clean(state.arch) || {};
+          delete a.actorRoles;
+          const r = effectiveRoles();
+          if (r.length) a.actorRoles = r;
+          if (Object.keys(a).length) o.archaeologySupplement = a;
+        }
+        document.getElementById("out").textContent = JSON.stringify(o, null, 2);
+        refreshActors();
+        refreshVocab();
+      }
+      function init() {
+        state = { core: {}, arch: {} };
+        draw("coreBody", CORE, "core");
+        draw("archBody", ARCH, "arch");
+        out();
+      }
+
+      /* ---------- Vocabulary lookup ---------- */
+      const lastSeg = (u) =>
+        String(u || "")
+          .replace(/[#/]+$/, "")
+          .split(/[/#]/)
+          .pop();
+      const cleanQ = (q) =>
+        q
+          .replace(/[^\p{L}\p{N}\s-]/gu, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+      async function fetchJson(url, opts = {}) {
+        const ac = new AbortController(),
+          t = setTimeout(() => ac.abort(), CONFIG.timeoutMs);
+        try {
+          const r = await fetch(url, { ...opts, signal: ac.signal });
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return await r.json();
+        } catch (e) {
+          throw new Error(e.name === "AbortError" ? "timeout" : e.message);
+        } finally {
+          clearTimeout(t);
+        }
+      }
+      const sparql = (endpoint, query) =>
+        fetchJson(
+          endpoint +
+            (endpoint.includes("?") ? "&" : "?") +
+            "query=" +
+            encodeURIComponent(query),
+          { headers: { Accept: "application/sparql-results+json" } },
+        );
+      const B = (r, k) => r[k]?.value;
+      async function qGetty(q) {
+        const terms = cleanQ(q)
+          .split(" ")
+          .filter(Boolean)
+          .map((t, i, a) => (i === a.length - 1 ? t + "*" : t))
+          .join(" AND ");
+        const query = `PREFIX luc:<http://www.ontotext.com/owlim/lucene#>
+PREFIX gvp:<http://vocab.getty.edu/ontology#>
+PREFIX xl:<http://www.w3.org/2008/05/skos-xl#>
+SELECT ?s ?label ?parent WHERE {
+ ?s luc:term "${terms}" ; a gvp:Subject ; gvp:prefLabelGVP [xl:literalForm ?label] .
+ FILTER(STRSTARTS(STR(?s),"http://vocab.getty.edu/aat/"))
+ OPTIONAL{?s gvp:parentString ?parent}
+} LIMIT ${CONFIG.limit}`;
+        const j = await sparql(CONFIG.getty, query);
+        return j.results.bindings.map((r) => ({
+          uri: B(r, "s"),
+          label: B(r, "label"),
+          code: lastSeg(B(r, "s")),
+          note: B(r, "parent") || "",
+        }));
+      }
+      async function qHeritage(q, path) {
+        const w = cleanQ(q).toLowerCase().split(" ").filter(Boolean);
+        const scope = path
+          ? `FILTER(CONTAINS(STR(?c),"/schemes/${path}/concepts/"))`
+          : `FILTER(CONTAINS(STR(?c),"/concepts/"))`;
+        const query = `PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+SELECT DISTINCT ?c ?label ?broader WHERE {
+ ?c skos:prefLabel ?label . ${scope}
+ ${w.map((x) => `FILTER(CONTAINS(LCASE(STR(?label)),"${x}"))`).join(" ")}
+ OPTIONAL{?c skos:broader ?b . ?b skos:prefLabel ?broader}
+} ORDER BY ?label LIMIT ${CONFIG.limit}`;
+        const j = await sparql(CONFIG.heritage, query),
+          seen = new Set();
+        return j.results.bindings
+          .filter((r) => !seen.has(B(r, "c")) && seen.add(B(r, "c")))
+          .map((r) => ({
+            uri: B(r, "c"),
+            label: B(r, "label"),
+            code: lastSeg(B(r, "c")),
+            note:
+              (B(r, "broader") ? "Broader: " + B(r, "broader") : "") +
+              (path
+                ? ""
+                : " · scheme " +
+                  (B(r, "c").match(/schemes\/([^/]+)\//) || [])[1]),
+          }));
+      }
+      let periodoIdx = null,
+        periodoLoading = null;
+      function loadPeriodo() {
+        return (periodoLoading ??= fetchJson(CONFIG.periodo)
+          .then((d) => {
+            const ix = [];
+            for (const [aid, a] of Object.entries(d.authorities || {})) {
+              const src = a.source || {},
+                sn = (src.title || src.citation || "").toString().slice(0, 90);
+              for (const [pid, p] of Object.entries(a.periods || {})) {
+                const id = p.id || pid,
+                  uri = /^https?:/.test(id)
+                    ? id
+                    : "http://n2t.net/ark:/99152/" + id;
+                const dl = (x) => x?.label || (x?.in?.year ?? "");
+                ix.push({
+                  uri,
+                  label: p.label || "",
+                  spatial: p.spatialCoverageDescription || "",
+                  start: dl(p.start),
+                  stop: dl(p.stop),
+                  auth: sn,
+                  hay: (
+                    (p.label || "") +
+                    " " +
+                    (p.spatialCoverageDescription || "")
+                  ).toLowerCase(),
+                });
+              }
+            }
+            periodoIdx = ix;
+            return ix;
+          })
+          .catch((e) => {
+            periodoLoading = null;
+            throw e;
+          }));
+      }
+      async function qPeriodo(q) {
+        const ix = periodoIdx || (await loadPeriodo()),
+          w = cleanQ(q).toLowerCase().split(" ").filter(Boolean);
+        return ix
+          .filter((p) => w.every((x) => p.hay.includes(x)))
+          .sort((a, b) => a.label.length - b.label.length)
+          .slice(0, CONFIG.limit)
+          .map((p) => ({
+            uri: p.uri,
+            label: p.label,
+            code: lastSeg(p.uri),
+            note: [
+              p.spatial,
+              [p.start, p.stop].filter(Boolean).join(" – "),
+              p.auth,
+            ]
+              .filter(Boolean)
+              .join(" · "),
+          }));
+      }
+      const qLocal = (q, list) => {
+        const w = cleanQ(q).toLowerCase();
+        return list.filter(
+          (x) =>
+            x.label.toLowerCase().includes(w) || x.code.toLowerCase() === w,
+        );
+      };
+      const MUNSELL =
+        /^(N\s?\d+(\.\d+)?\/?|\d+(\.\d+)?\s?(R|YR|Y|GY|G|BG|B|PB|P|RP)\s?\d+(\.\d+)?\/\d+(\.\d+)?)(\s.*)?$/i;
+      async function search(srcId, q) {
+        const lk = SRC[srcId].lk;
+        if (
+          CONFIG.proxy &&
+          ["getty", "heritage", "periodo"].includes(lk.kind)
+        ) {
+          const j = await fetchJson(
+            `${CONFIG.proxy}${srcId}?q=${encodeURIComponent(q)}&limit=${CONFIG.limit}`,
+          );
+          return Array.isArray(j) ? j : j.items || [];
+        }
+        if (lk.kind === "getty") return qGetty(q);
+        if (lk.kind === "heritage") return qHeritage(q, lk.path);
+        if (lk.kind === "periodo") return qPeriodo(q);
+        if (lk.kind === "local") return qLocal(q, SOIL);
+        return [];
+      }
+      const timers = {},
+        tokens = {};
+      let active = -1;
+      function lbOf(inp) {
+        return inp.parentElement.querySelector(".lb");
+      }
+      function statusOf(inp) {
+        return inp.closest(".vblock").querySelector(".vlook");
+      }
+      function closeLb(inp) {
+        const lb = lbOf(inp);
+        lb.hidden = true;
+        lb.innerHTML = "";
+        inp.setAttribute("aria-expanded", "false");
+        active = -1;
+      }
+      function showItems(inp, items, srcId) {
+        const lb = lbOf(inp);
+        window._items = items;
+        lb.innerHTML = items
+          .map(
+            (it, i) =>
+              `<div class="opt" role="option" data-i="${i}">${esc(it.label)}${it.note ? `<small>${esc(it.note)}</small>` : ""}<small>${esc(it.uri || "code " + (it.code || ""))}</small></div>`,
+          )
+          .join("");
+        lb.hidden = !items.length;
+        inp.setAttribute("aria-expanded", String(!!items.length));
+        active = -1;
+        lb.dataset.src = srcId;
+      }
+      function pick(inp, it) {
+        const path = inp.dataset.vq,
+          srcId = get(state.arch, path)?._src;
+        const cur = get(state.arch, path) || {};
+        set(state.arch, path, {
+          ...cur,
+          term: it.label,
+          termUri: it.uri || "",
+          code: it.code || "",
+          vocabularyName: SRC[srcId].name,
+          vocabularyUri: SRC[srcId].uri,
+          _src: srcId,
+        });
+        const q = (s) => document.querySelector(`[data-p="${path}.${s}"]`);
+        inp.value = it.label;
+        if (q("termUri")) q("termUri").value = it.uri || "";
+        if (q("code")) q("code").value = it.code || "";
+        closeLb(inp);
+        const st = statusOf(inp);
+        st.innerHTML =
+          '<span class="ok">✓ Selected from ' +
+          esc(SRC[srcId].name) +
+          "</span>";
+        out();
+      }
+      function onVocabInput(inp) {
+        const path = inp.dataset.vq,
+          srcId = get(state.arch, path)?._src,
+          st = statusOf(inp),
+          q = inp.value.trim();
+        clearTimeout(timers[path]);
+        const lk = srcId && SRC[srcId]?.lk;
+        if (!lk || !liveKinds.includes(lk.kind)) {
+          closeLb(inp);
+          st.textContent =
+            srcId && lk?.kind === "none"
+              ? "No lookup service exists for this source. Open the link above, find the term, and paste its URI."
+              : srcId === "other" || !srcId
+                ? "Choose a vocabulary above to enable lookup."
+                : "";
+          return;
+        }
+        if (lk.kind === "munsell") {
+          closeLb(inp);
+          st.innerHTML = !q
+            ? ""
+            : MUNSELL.test(q)
+              ? '<span class="ok">✓ Looks like Munsell notation (hue value/chroma)</span>'
+              : '<span class="warn">⚠ Not in Munsell notation, e.g. 2.5YR 3/3 or N 5/</span>';
+          return;
+        }
+        if (q.length < CONFIG.minChars) {
+          closeLb(inp);
+          st.textContent = q
+            ? `Type at least ${CONFIG.minChars} characters.`
+            : "";
+          return;
+        }
+        const my = (tokens[path] = (tokens[path] || 0) + 1);
+        st.textContent =
+          lk.kind === "periodo" && !periodoIdx
+            ? "Loading the PeriodO dataset (first search only)…"
+            : "Searching…";
+        timers[path] = setTimeout(
+          async () => {
+            try {
+              const items = await search(srcId, q);
+              if (tokens[path] !== my) return;
+              showItems(inp, items, srcId);
+              st.innerHTML = items.length
+                ? `${items.length} match${items.length === 1 ? "" : "es"} · pick one, or keep typing`
+                : "No match found. You can keep your own term and add a URI or code.";
+            } catch (e) {
+              if (tokens[path] !== my) return;
+              closeLb(inp);
+              st.innerHTML = `<span class="warn">⚠ Lookup failed (${esc(e.message)}). This is usually a network or CORS restriction: set CONFIG.proxy to your own server route, or type the term and paste its URI.</span>`;
+            }
+          },
+          lk.kind === "local" ? 0 : CONFIG.debounceMs,
+        );
+      }
+      document.addEventListener("input", (e) => {
+        const t = e.target;
+        if (t.dataset?.vq) onVocabInput(t);
+      });
+      document.addEventListener("keydown", (e) => {
+        const t = e.target;
+        if (!t.dataset?.vq) return;
+        const lb = lbOf(t);
+        if (lb.hidden) return;
+        const opts = [...lb.querySelectorAll(".opt")];
+        if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+          e.preventDefault();
+          active =
+            (active + (e.key === "ArrowDown" ? 1 : -1) + opts.length) %
+            opts.length;
+          opts.forEach((o, i) => o.classList.toggle("on", i === active));
+          opts[active].scrollIntoView({ block: "nearest" });
+        } else if (e.key === "Enter" && active >= 0) {
+          e.preventDefault();
+          pick(t, window._items[active]);
+        } else if (e.key === "Escape") closeLb(t);
+      });
+      document.addEventListener("mousedown", (e) => {
+        const o = e.target.closest?.(".opt");
+        if (o) {
+          e.preventDefault();
+          const inp = o.closest(".combo").querySelector("input");
+          pick(inp, window._items[+o.dataset.i]);
+        } else
+          document
+            .querySelectorAll(".lb:not([hidden])")
+            .forEach((lb) => closeLb(lb.parentElement.querySelector("input")));
+      });
+
+      /* ---------- Events ---------- */
+      document.addEventListener("input", (e) => {
+        const p = e.target.dataset?.p;
+        if (!p) return;
+        const root = e.target.closest("#core") ? state.core : state.arch;
+        set(
+          root,
+          p,
+          e.target.type === "checkbox" ? e.target.checked : e.target.value,
+        );
+        out();
+      });
+      function redraw(t) {
+        const k = t.closest("#core") ? "core" : "arch",
+          s = k === "core" ? CORE : ARCH,
+          id = k + "Body",
+          open = [...document.querySelectorAll("#" + id + " details")].map(
+            (d) => d.open,
+          );
+        return [
+          k,
+          s,
+          id,
+          () => {
+            draw(id, s, k);
+            document
+              .querySelectorAll("#" + id + " details")
+              .forEach((d, i) => (d.open = open[i]));
+            out();
+          },
+        ];
+      }
+      document.addEventListener("change", (e) => {
+        const t = e.target;
+        if (!t.dataset?.vsrc) return;
+        const [k, , , done] = redraw(t),
+          p = t.dataset.vsrc;
+        const cur = get(state[k], p) || {};
+        const nv = { ...cur, _src: t.value };
+        if (t.value && t.value !== "other") {
+          nv.vocabularyName = SRC[t.value].name;
+          nv.vocabularyUri = SRC[t.value].uri;
+        } else if (t.value === "other") {
+          nv.vocabularyName = "";
+          nv.vocabularyUri = "";
+        } else {
+          delete nv.vocabularyName;
+          delete nv.vocabularyUri;
+        }
+        set(state[k], p, nv);
+        done();
+        const inp = document.querySelector(`[data-vq="${p}"]`);
+        if (inp && inp.value) onVocabInput(inp);
+        const kd = kindOf(t.value);
+        if (kd === "periodo" && !periodoIdx && !periodoLoading)
+          loadPeriodo().catch(() => {});
+      });
+      document.addEventListener("click", (e) => {
+        const t = e.target;
+        if (t.dataset.add) {
+          const [k, , , done] = redraw(t);
+          let a = get(state[k], t.dataset.add);
+          if (!a) set(state[k], t.dataset.add, (a = []));
+          a.push(t.dataset.str ? "" : {});
+          done();
+        }
+        if (t.dataset.rm) {
+          const [k, , , done] = redraw(t);
+          get(state[k], t.dataset.rm).splice(+t.dataset.i, 1);
+          done();
+        }
+      });
+      document.getElementById("isArch").onchange = (e) => {
+        arch = e.target.checked;
+        document.getElementById("arch").classList.toggle("off", !arch);
+        out();
+      };
+      document.getElementById("reset").onclick = () => {
+        document.getElementById("isArch").checked = false;
+        arch = false;
+        document.getElementById("arch").classList.add("off");
+        init();
+      };
+      document.getElementById("theme").onclick = () => {
+        const b = document.body;
+        b.dataset.theme = b.dataset.theme === "dark" ? "light" : "dark";
+      };
+      document.getElementById("copy").onclick = async (e) => {
+        await navigator.clipboard.writeText(
+          document.getElementById("out").textContent,
+        );
+        e.target.textContent = "Copied";
+        setTimeout(() => (e.target.textContent = "Copy"), 1200);
+      };
+      document.getElementById("covered").innerHTML = COVERED.map(
+        (x) => `<span>${esc(x)}</span>`,
+      ).join("");
+      const lkA = (n, u) =>
+        u
+          ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`
+          : esc(n);
+      document.getElementById("refOpen").innerHTML = REF_OPEN.map(
+        (r) =>
+          `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${r[2].map((id) => lkA(SRC[id].name, SRC[id].url)).join("<br>")}</td><td>${esc(r[3])}</td></tr>`,
+      ).join("");
+      document.getElementById("refFixed").innerHTML = REF_FIXED.map(
+        (r) =>
+          `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${lkA(r[2][0], r[2][1])}</td><td>${esc(r[3])}</td></tr>`,
+      ).join("");
+      document.getElementById("refSrc").innerHTML = Object.values(SRC)
+        .map(
+          (s) =>
+            `<tr><td>${esc(s.name)}</td><td>${lkA(s.url, s.url)}${s.alt && s.alt !== s.url ? `<br>${lkA(s.alt, s.alt)}` : ""}</td><td><code>${esc(s.uri)}</code></td><td>${esc(LK_TEXT[s.lk.kind])}</td></tr>`,
+        )
+        .join("");
+      document.getElementById("cfgShow").textContent =
+        "const CONFIG = " + JSON.stringify(CONFIG, null, 2);
+      stats();
+      init();
+    </script>
+  </body>
+</html>
